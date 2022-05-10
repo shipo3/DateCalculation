@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.example.demo.repository.DateCalculationMapper">
+
+  <resultMap type="com.example.demo.domain.FormulaData" id="formulaData"><!--  id属性は任意の値 -->
+    <!--  columnはSQLのカラム　propertyはエンティティクラスのフィールド -->
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="detail" property="detail"></result>
+    <result column="year" property="year" />
+    <result column="month" property="month" ></result>
+    <result column="day" property="day" ></result>
+  </resultMap>
+
+  <select id="findOne" resultMap="formulaData">select  *
+    from    formula    where   id = #{id}</select>
+
+  <select id="findAll" resultType="com.example.demo.domain.FormulaData">select  *
+    from    formula</select>
+
+  <insert id="insertOne" useGeneratedKeys="true" keyProperty="id">insert into formula ( id,name, detail, year, month, day ) values (
+#{id}, #{name}, #{detail}, #{year}, #{month}, #{day} )</insert>
+
+  <update id="updateOne">update  formula    set   id =#{id},  name = #{name},
+  detail = #{detail}
+,  year = #{year},   month = #{month},  day = #{day}   where   id = #{id}</update>
+
+  <delete id="deleteOne">delete from
+ formula   where
+        id = #{id}</delete>
+
+  </mapper>

@@ -33,9 +33,19 @@ margin: 0px 0px 10px 600px;
 padding       : 10px 10px;
 border: none;
 }
-.result-head,.result-table {
+.result-head {
  background-color: #fff;
 padding-top: 1px;
+}
+.result-table {
+ background-color: #fff;
+
+display: flex;
+
+}
+.result-bottom {
+  background-color: #fff;
+   color: #fff;
 }
 h3 {
  color: #17184b;
@@ -44,26 +54,52 @@ h3 {
  display: inline-block
  
 }
-table {
-  width: 75%;
+.table1 {
+  width: 70%;
   border-collapse: collapse;
   font-size: 18px;
-   margin: 0 auto ;
-   padding-bottom: 100px;
+   margin-left: 150px ;
+   
+}
+
+.table2 {
+  width: 150px;
+  border-collapse: separate;
+  font-size: 17px;
 
 }
+
 
 table th, table td {
   border: 2px solid #17184b;
   padding: 6px;
+  color: #17184b;
+ text-align: center;
 }
 
 table th {
   background-color: #afeeee;
-  color: #17184b;
 }
-
+.change-btn {
+ background-color: #d7003a;
+ color: #fff;
+cursor: pointer;
+font-size: 100%;
+padding  : 5px ;
+border: none;
+}
+.delete-btn {
+ background-color: #fff;
+ color: #d7003a;
+cursor: pointer;
+font-size: 100%;
+padding  : 5px ;
+border: thin solid #d7003a;
+}
 footer {
  background-color: #745399;
  color: #fff;
+}
+h1 {
+ margin-left: 30px;
 }

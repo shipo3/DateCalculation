@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MyCollectionApplication {
+public class DateCalculationApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MyCollectionApplication.class, args);
+		SpringApplication.run(DateCalculationApplication.class, args);
 	}
 
 }

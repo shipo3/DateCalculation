@@ -21,7 +21,8 @@
 <input type="button" value="新規登録" class="new-btn">
 </div>
 <div class="result-table">
-  <table>
+
+  <table class="table1">
     <tr>
       <th>ID</th>
 						<th>登録名</th>
@@ -29,14 +30,37 @@
 						<th>計算式（年/月/日）</th>
 						<th>変更</th>
 						<th>削除</th>
-						<th>計算結果</th>
     </tr>
-    
-    
+    <tr th:each="fd : ${fdList}"  th:object="${fd}">
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{detail}"></td>
+        <td th:text="*{year} + '　/　' + *{month} + '　/　' +*{day} "></td>
+      
+<td><button class="change-btn">更新</button></td>
+	<td><button class="delete-btn">削除</button></td>
+</tr>
   </table>
+
+<table class="table2">
+					<tr>
+						<th>計算結果</th>
+					</tr>
+					<tr th:each="re : ${resultList}" >
+						<td th:text="${re}"></td>
+					</tr>
+				</table>
+  
+
+
    </div>
+   <div class="result-bottom">
+余白<br>
+余白<br>
+   </div>
+
   <footer>
 <h1>日付計算アプリ</h1>
-</footer>
+</footer> 
 </body>
 </html>

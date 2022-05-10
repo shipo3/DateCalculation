@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <title>Date Calculation</title>
+  <link th:href="@{/css/top_style.css}" rel="stylesheet" type="text/css"> </head>
+<body>
+<header>
+<a href="" >TOPへ戻る</a>
+<h2>新規登録</h2>
+</header>
+ <div class="form-area">
+ <form  method="post" action="#" th:action="@{/calculation/comfirm}" >
+<label for="id" class="" >ID</label>
+<input type="text" id="id" name="id"  >
+<p  class="input-error" th:text="${inputError}"></p>
+
+<label for="name" class="" >お名前</label>
+<input type="text" id="name" name="name"  >
+<p  class="input-error" th:text="${inputError}"></p>
+
+<label for="detail" class="" >説明</label>
+<input type="text" id="detail" name="detail"  >
+<p  class="input-error" th:text="${inputError}"></p>
+
+<label for="year" class="" >加算日（年）</label>
+<input type="text" id="year" name="year"  >
+<p  class="input-error" th:text="${inputError}"></p>
+
+<label for="month" class="" >加算日（日）</label>
+<input type="text" id="month" name="month"  >
+<p  class="input-error" th:text="${inputError}"></p>
+
+<label for="day" class="" >加算日（月）</label>
+<input type="text" id="day" name="day" >
+<p  class="input-error" th:text="${inputError}"></p>
+
+<input type="submit" value="次へ" class="register-btn" >
+<input type="reset" value="リセットする" class="reset-btn">
+
+</form>
+</div>
+
+  <footer>
+<h1>日付計算アプリ</h1>
+</footer> 
+</body>
+</html>
