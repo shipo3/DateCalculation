@@ -3,14 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <title>Date Calculation</title>
-  <link th:href="@{/css/new_style.css}" rel="stylesheet" type="text/css"> </head>
+  <link th:href="@{/css/new_style.css}" rel="stylesheet" type="text/css">
+</head>
 <body>
   <header>
     <h2>計算式の新規登録</h2> <a th:href="@{'/calculation/top'}" class="back">TOPへ戻る</a>
     <p th:text="${complete}" class="complete-message"></p>
   </header>
   <div class="form-area">
-    <form method="post" action="#" th:action="@{/calculation/confirm}" th:object="${formulaData}"> <label for="name" class="input-label">登録名を入力して下さい。</label><span class="required">＊</span>
+    <form method="post" action="#" th:action="@{/calculation/new_confirm}" th:object="${formulaData}"> 
+    	 <label for="name" class="input-label">登録名を入力して下さい。</label><span class="required">＊</span>
 		 <span class="input-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br> 
     	 <input type="text" id="name" name="name" max="30" placeholder="登録名" class="input-box" th:value="*{name}"><br>
     	 <label for="detail" class="input-label">説明を入力して下さい。　</label><span class="required">＊</span> 

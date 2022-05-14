@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,7 +58,7 @@ public class DateCalculationController {
 	return "calculation/top";
     }
 
-//新規登録押下後の画面取得  /　登録完了メッセージ取得
+//「新規登録」押下後の画面取得  /　登録完了メッセージ取得
     @GetMapping("/new")
     public String form(FormulaData formulaData, Model model, @ModelAttribute("complete") String complete) {
 	model.addAttribute("formuladata", new FormulaData());
@@ -72,7 +73,7 @@ public class DateCalculationController {
     }
 
 //新規登録にて「次へ」押下時　バリデーションチェック行なう
-    @PostMapping("/confirm")
+    @PostMapping("/new_confirm")
     public String confirm(@Validated FormulaData formulaData, BindingResult result, Model model) {
 	if (result.hasErrors()) {
 	    model.addAttribute("title", "calc_new");
@@ -80,7 +81,7 @@ public class DateCalculationController {
 	}
 	// 入力エラーなければ確認画面へ進む
 	model.addAttribute("title", "calc_confirm");
-	return "calculation/confirm";
+	return "calculation/new_confirm";
 
     }
 
@@ -96,6 +97,29 @@ public class DateCalculationController {
 	dateCalculationService.insertOne(formulaData);
 	redirectAttributes.addFlashAttribute("complete", "新規登録完了しました。");
 	return "redirect:/calculation/new";
+    }
+    // calculation.htmlにて[更新]押下時にchange.htmlを表示
+
+    @GetMapping("change/id={id}")
+    public String change(@PathVariable("id") int id, Model model) {
+	model.addAttribute("formulaData", dateCalculationService.getOne(id));
+	return "calculation/change";
+    }
+
+    // change.htmlにて変更を登録する
+    @PostMapping("change/id={id}")
+    public String update(@ModelAttribute FormulaData fd, Model model) {
+	dateCalculationService.updateOne(fd.getId(), fd.getName(), fd.getDetail(), fd.getYear(), fd.getMonth(),
+		fd.getDay());
+	return "redirect:/top";
+    }
+
+    // calculation.htmlにて[削除]押下
+
+    @PostMapping("delete/id={id}")
+    public String delete(@PathVariable int id, @ModelAttribute FormulaData fd) {
+	dateCalculationService.deleteOne(fd);
+	return "redirect:/top";
     }
 
 }
