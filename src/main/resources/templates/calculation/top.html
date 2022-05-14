@@ -5,62 +5,49 @@
   <title>Date Calculation</title>
   <link th:href="@{/css/top_style.css}" rel="stylesheet" type="text/css"> </head>
 <body>
- <div class="input-date">
- <form  method="post" action="#" th:action="@{/calculation/top}" >
-<h2><label for="inputDate" class="input-text" >基準となる日付を入力して下さい</label></h2>
-<input type="date" id="inputDate" name="inputDate"  >
-
-<input type="submit" value="計算する" class="calc-btn" >
-<input type="reset" value="リセットする" class="reset-btn">
-<p  class="input-error" th:text="${inputError}"></p>
-</form>
-</div>
-
-<div class="result-head">
-<h3>入力した基準日：<span class="id" th:text="${id}"></span></h3>
-<input type="button" value="新規登録" class="new-btn">
-</div>
-<div class="result-table">
-
-  <table class="table1">
-    <tr>
-      <th>ID</th>
-						<th>登録名</th>
-						<th>説明</th>
-						<th>計算式（年/月/日）</th>
-						<th>変更</th>
-						<th>削除</th>
-    </tr>
-    <tr th:each="fd : ${fdList}"  th:object="${fd}">
+  <div class="input-date">
+    <form method="post" action="#" th:action="@{/calculation/top}">
+      <h2><label for="inputDate" class="input-text">基準となる日付を入力して下さい</label>
+      </h2> <input type="date" id="inputDate" name="inputDate"> 
+      <input type="submit" value="計算する" class="calc-btn"> 
+      <input type="reset" value="リセットする" class="reset-btn">
+      <p class="input-error" th:text="${inputError}"></p>
+    </form>
+  </div>
+  <div class="result-head">
+    <h3>入力した基準日：<span class="id" th:text="${id}"></span></h3> 
+    <a th:href="@{'/calculation/new'}" class="new-btn">新規登録</a> </div>
+  <div class="result-table">
+    <table class="table1">
+      <tr>
+        <th>ID</th>
+        <th>登録名</th>
+        <th>説明</th>
+        <th>計算式（年/月/日）</th>
+        <th>変更</th>
+        <th>削除</th>
+      </tr>
+      <tr th:each="fd : ${fdList}" th:object="${fd}">
         <td th:text="*{id}"></td>
         <td th:text="*{name}"></td>
         <td th:text="*{detail}"></td>
         <td th:text="*{year} + '　/　' + *{month} + '　/　' +*{day} "></td>
-      
-<td><button class="change-btn">更新</button></td>
-	<td><button class="delete-btn">削除</button></td>
-</tr>
-  </table>
-
-<table class="table2">
-					<tr>
-						<th>計算結果</th>
-					</tr>
-					<tr th:each="re : ${resultList}" >
-						<td th:text="${re}"></td>
-					</tr>
-				</table>
-  
-
-
-   </div>
-   <div class="result-bottom">
-余白<br>
-余白<br>
-   </div>
-
+        <td><button class="change-btn">更新</button></td>
+        <td><button class="delete-btn">削除</button></td>
+      </tr>
+    </table>
+    <table class="table2">
+      <tr>
+        <th>計算結果</th>
+      </tr>
+      <tr th:each="re : ${resultList}">
+        <td th:text="${re}"></td>
+      </tr>
+    </table>
+  </div>
+  <div class="result-bottom"> 余白<br> 余白<br> </div>
   <footer>
-<h1>日付計算アプリ</h1>
-</footer> 
+    <h1>日付計算アプリ</h1>
+  </footer>
 </body>
 </html>

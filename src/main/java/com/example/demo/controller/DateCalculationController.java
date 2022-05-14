@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.FormulaData;
 import com.example.demo.service.DateCalculationService;
@@ -32,6 +36,7 @@ public class DateCalculationController {
 
     @PostMapping("/top")
     public String postTop(@RequestParam("inputDate") String inputDate, Model model) {
+	// 入力日が空の場合はエラーを出す
 	if (inputDate.isEmpty()) {
 	    String error = "＊基準日を入力して下さい。";
 	    model.addAttribute("inputError", error);
@@ -39,6 +44,7 @@ public class DateCalculationController {
 	    model.addAttribute("id", inputDate);
 	    return "calculation/top";
 	}
+	// 入力日がある場合は計算処理を行い結果出力する
 	List<String> re = dateCalculationService.dateAdjust(inputDate);
 	model.addAttribute("resultList", re);
 	String inputDate2 = inputDate.replace("-", "/");
@@ -48,12 +54,48 @@ public class DateCalculationController {
 	System.out.println(formulaDataList);
 	model.addAttribute("fdList", formulaDataList);
 
-//	if (CollectionUtils.isEmpty(formulaDataList)) {
-//	}
-//	for (String result : re) {
-//	    model.addAttribute("result", result);
-//	}
 	return "calculation/top";
+    }
+
+//新規登録押下後の画面取得  /　登録完了メッセージ取得
+    @GetMapping("/new")
+    public String form(FormulaData formulaData, Model model, @ModelAttribute("complete") String complete) {
+	model.addAttribute("formuladata", new FormulaData());
+	return "calculation/new";
+    }
+
+//確認画面から戻った時
+    @PostMapping("/new")
+    public String formback(FormulaData formulaData, Model model) {
+	model.addAttribute("title", "calc_new");
+	return "calculation/new";
+    }
+
+//新規登録にて「次へ」押下時　バリデーションチェック行なう
+    @PostMapping("/confirm")
+    public String confirm(@Validated FormulaData formulaData, BindingResult result, Model model) {
+	if (result.hasErrors()) {
+	    model.addAttribute("title", "calc_new");
+	    return "calculation/new";
+	}
+	// 入力エラーなければ確認画面へ進む
+	model.addAttribute("title", "calc_confirm");
+	return "calculation/confirm";
+
+    }
+
+//確認画面にて「登録する」押下時　エラーがなければDBに新規登録してnew画面に戻る
+    @PostMapping("/complete")
+    public String create(@Validated FormulaData formulaData, BindingResult result, Model model,
+	    RedirectAttributes redirectAttributes) {
+
+	if (result.hasErrors()) {
+	    model.addAttribute("title", "calc_new");
+	    return "calculation/new";
+	}
+	dateCalculationService.insertOne(formulaData);
+	redirectAttributes.addFlashAttribute("complete", "新規登録完了しました。");
+	return "redirect:/calculation/new";
     }
 
 }

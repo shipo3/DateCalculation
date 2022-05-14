@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
@@ -7,13 +8,13 @@ import lombok.Data;
 @Data
 //新規登録、更新時の入力チェック
 public class FormulaData {
-    @Size(min = 1, max = 5, message = "ID番号を入力して下さい。")
     private int id;
-
-    @Size(min = 1, max = 30, message = "登録名を入力して下さい。")
+    @NotBlank(message = "30文字以内で登録名を入力して下さい。")
+    @Size(max = 30, message = "30文字以内で登録名を入力して下さい。")
     private String name;
 
-    @Size(max = 100)
+    @NotBlank(message = "100文字以内で登録名を入力して下さい。")
+    @Size(max = 100, message = "100文字以内で説明を入力して下さい。")
     private String detail;
     private int year;
     private int month;

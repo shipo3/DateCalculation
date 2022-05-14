@@ -1,0 +1,54 @@
+header {
+  color: #745399;
+  height: 130px;
+}
+
+.back {
+  font-size: 150%;
+  float: left;
+  margin: 20px 1000px 20px 30px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+h2 {
+  margin: 20px 50px 20px 300px;
+}
+
+.form-area {
+  background-color: #745399;
+  color: #fff;
+  font-size: 150%;
+  padding: 10px 0px;
+}
+
+p {
+  margin: 10px 100px 0px 600px;
+}
+
+.back-btn {
+  background-color: #fff;
+  color: #d7003a;
+  border: thin solid #d7003a;
+  cursor: pointer;
+  font-size: 100%;
+  margin: 10px 10px 10px 1400px;
+  padding: 10px 10px;
+  display: inline-block;
+}
+
+.register-btn {
+  background-color: #d7003a;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 100%;
+  margin: 10px 10px 10px 1400px;
+  padding: 10px 10px;
+  display: inline-block;
+}
+
+h1 {
+  margin-left: 30px;
+  color: #745399;
+}

@@ -3,46 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <title>Date Calculation</title>
-  <link th:href="@{/css/top_style.css}" rel="stylesheet" type="text/css"> </head>
+  <link th:href="@{/css/new_style.css}" rel="stylesheet" type="text/css"> </head>
 <body>
-<header>
-<a href="" >TOPへ戻る</a>
-<h2>新規登録</h2>
-</header>
- <div class="form-area">
- <form  method="post" action="#" th:action="@{/calculation/comfirm}" >
-<label for="id" class="" >ID</label>
-<input type="text" id="id" name="id"  >
-<p  class="input-error" th:text="${inputError}"></p>
-
-<label for="name" class="" >お名前</label>
-<input type="text" id="name" name="name"  >
-<p  class="input-error" th:text="${inputError}"></p>
-
-<label for="detail" class="" >説明</label>
-<input type="text" id="detail" name="detail"  >
-<p  class="input-error" th:text="${inputError}"></p>
-
-<label for="year" class="" >加算日（年）</label>
-<input type="text" id="year" name="year"  >
-<p  class="input-error" th:text="${inputError}"></p>
-
-<label for="month" class="" >加算日（日）</label>
-<input type="text" id="month" name="month"  >
-<p  class="input-error" th:text="${inputError}"></p>
-
-<label for="day" class="" >加算日（月）</label>
-<input type="text" id="day" name="day" >
-<p  class="input-error" th:text="${inputError}"></p>
-
-<input type="submit" value="次へ" class="register-btn" >
-<input type="reset" value="リセットする" class="reset-btn">
-
-</form>
-</div>
-
+  <header>
+    <h2>計算式の新規登録</h2> <a th:href="@{'/calculation/top'}" class="back">TOPへ戻る</a>
+    <p th:text="${complete}" class="complete-message"></p>
+  </header>
+  <div class="form-area">
+    <form method="post" action="#" th:action="@{/calculation/confirm}" th:object="${formulaData}"> <label for="name" class="input-label">登録名を入力して下さい。</label><span class="required">＊</span>
+		 <span class="input-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br> 
+    	 <input type="text" id="name" name="name" max="30" placeholder="登録名" class="input-box" th:value="*{name}"><br>
+    	 <label for="detail" class="input-label">説明を入力して下さい。　</label><span class="required">＊</span> 
+    	 <span class="input-error" th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}">
+    	 </span><br> <input type="text" id="detail" name="detail" max="100" placeholder="説明" class="input-box" th:value="*{detail}"><br> 
+    	 <label for="year" class="input-label">加減値（年）を選択して下さい。</label><br> 
+    	 <input type="number" id="year" name="year" min="-100" max="100" placeholder="0" class="input-box" th:value="*{year}"><br>
+     	 <label for="month" class="input-label">加減値（月）を選択して下さい。</label><br> 
+     	 <input type="number" id="month" name="month" min="-120" max="120" placeholder="0" class="input-box" th:value="*{month}"><br>
+     	 <label for="day" class="input-label">加減値（日）を選択して下さい。</label><br> 
+    	 <input type="number" id="day" name="day" min="-36500" max="3650" placeholder="0" class="input-box" th:value="*{day}"><br> 
+     
+         <input type="reset" value="リセット" class="reset-btn"> 
+         <input type="submit" value="　次へ　" class="next-btn"> 
+    </form>
+  </div>
   <footer>
-<h1>日付計算アプリ</h1>
-</footer> 
+    <h1>日付計算アプリ</h1>
+  </footer>
 </body>
 </html>
