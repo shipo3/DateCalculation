@@ -7,8 +7,8 @@
 </head>
 <body>
   <header>
-    <h2>計算式の新規登録</h2> <a th:href="@{'/calculation/top'}" class="back">TOPへ戻る</a>
-    <p th:text="${complete}" class="complete-message"></p>
+    <h2>計算式の新規登録</h2> 
+    <a th:href="@{'/calculation/top'}" class="back">TOPへ戻る</a>
   </header>
   <div class="form-area">
     <form method="post" action="#" th:action="@{/calculation/new_confirm}" th:object="${formulaData}"> 

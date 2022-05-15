@@ -16,7 +16,9 @@
   </div>
   <div class="result-head">
     <h3>入力した基準日：<span class="id" th:text="${id}"></span></h3> 
-    <a th:href="@{'/calculation/new'}" class="new-btn">新規登録</a> </div>
+    <a th:href="@{'/calculation/new'}" class="new-btn">新規登録</a>
+        <span th:text="${complete}" class="complete-message"></span>
+  </div>
   <div class="result-table">
     <table class="table1">
       <tr>
@@ -32,8 +34,13 @@
         <td th:text="*{name}"></td>
         <td th:text="*{detail}"></td>
         <td th:text="*{year} + '　/　' + *{month} + '　/　' +*{day} "></td>
-        <td><button class="change-btn">更新</button></td>
-        <td><button class="delete-btn">削除</button></td>
+        <td>
+        	<form th:method="post" th:action="@{/calculation/change/id={id}(id=*{id})}">
+        	<button class="change-btn">更新</button></form></td>
+        <td>
+         	<form th:method="post" th:action="@{/calculation/delete/id={id}(id=*{id})}">
+         	<button class="delete-btn">削除</button></form>
+         </td>
       </tr>
     </table>
     <table class="table2">

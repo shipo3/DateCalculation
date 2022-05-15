@@ -91,35 +91,61 @@ public class DateCalculationController {
 	    RedirectAttributes redirectAttributes) {
 
 	if (result.hasErrors()) {
-	    model.addAttribute("title", "calc_new");
+	    redirectAttributes.addFlashAttribute("complete", "新規登録失敗しました。");
 	    return "calculation/new";
 	}
 	dateCalculationService.insertOne(formulaData);
 	redirectAttributes.addFlashAttribute("complete", "新規登録完了しました。");
-	return "redirect:/calculation/new";
+	return "redirect:/calculation/top";
     }
-    // calculation.htmlにて[更新]押下時にchange.htmlを表示
 
-    @GetMapping("change/id={id}")
+    // top.htmlにて[更新]押下時にchange.htmlを表示
+    @GetMapping("/change/id={id}")
     public String change(@PathVariable("id") int id, Model model) {
 	model.addAttribute("formulaData", dateCalculationService.getOne(id));
 	return "calculation/change";
     }
 
-    // change.htmlにて変更を登録する
-    @PostMapping("change/id={id}")
-    public String update(@ModelAttribute FormulaData fd, Model model) {
-	dateCalculationService.updateOne(fd.getId(), fd.getName(), fd.getDetail(), fd.getYear(), fd.getMonth(),
-		fd.getDay());
-	return "redirect:/top";
+    // 確認画面から戻った時
+    @PostMapping("/change/id={id}")
+    public String changeback(FormulaData formulaData, Model model) {
+	return "calculation/change";
+    }
+
+    // change.htmlにて[次へ]押下時 バリデーションチェック行なう
+    @PostMapping("/change_confirm")
+    public String changeConfirm(@Validated FormulaData formulaData, BindingResult result, Model model) {
+	if (result.hasErrors()) {
+	    return "calculation/change";
+	}
+	// 入力エラーなければ確認画面へ進む
+	return "calculation/change_confirm";
+    }
+
+//確認画面にて「更新する」押下時　エラーがなければDBに更新登録してchnge.htmlに戻る
+    @PostMapping("/change_complete")
+    public String upgate(@Validated FormulaData formulaData, BindingResult result, Model model,
+	    RedirectAttributes redirectAttributes) {
+
+	if (result.hasErrors()) {
+	    redirectAttributes.addFlashAttribute("complete", "更新失敗しました。");
+	    return "calculation/change";
+	}
+
+	dateCalculationService.updateOne(formulaData.getId(), formulaData.getName(), formulaData.getDetail(),
+		formulaData.getYear(), formulaData.getMonth(), formulaData.getDay());
+	redirectAttributes.addFlashAttribute("complete", "更新完了しました。");
+	return "redirect:/calculation/top";
     }
 
     // calculation.htmlにて[削除]押下
 
     @PostMapping("delete/id={id}")
-    public String delete(@PathVariable int id, @ModelAttribute FormulaData fd) {
-	dateCalculationService.deleteOne(fd);
-	return "redirect:/top";
+    public String delete(@PathVariable int id, @ModelAttribute FormulaData formulaData,
+	    RedirectAttributes redirectAttributes) {
+	dateCalculationService.deleteOne(formulaData);
+	redirectAttributes.addFlashAttribute("complete", "削除完了しました。");
+	return "redirect:/calculation/top";
     }
 
 }

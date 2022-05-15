@@ -47,6 +47,13 @@ body {
   opacity: 0.8;
 }
 
+.complete-message{
+   color: #d7003a;
+   font-weight: bold;
+   font-size: 120%;
+   margin-left: 100px;
+}
+
 .result-head {
   background-color: #fff;
   padding-top: 1px;

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <title>Date Calculation</title>
+  <link th:href="@{/css/change_style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+  <header>
+    <h2>計算式の更新</h2> 
+    <a th:href="@{'/calculation/top'}" class="back">TOPへ戻る</a>
+  </header>
+  
+  <div class="form-area">
+    <form method="post" action="#" th:action="@{/calculation/change_confirm}" th:object="${formulaData}"> 
+    	<label for="id" class="input-label">ID</label><br> 
+    	 <input type="text" id="id" name="id"  class="input-box-id" th:value="*{id}" readonly><br>
+    	 
+    	 <label for="name" class="input-label">登録名</label><span class="required">＊</span>
+		 <span class="input-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br> 
+    	 <input type="text" id="name" name="name" max="30" placeholder="登録名" class="input-box" th:value="*{name}"><br>
+    	 
+    	 <label for="detail" class="input-label">説 明</label><span class="required">＊</span> 
+    	 <span class="input-error" th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span><br> 
+    	 <input type="text" id="detail" name="detail" max="100" placeholder="説明" class="input-box" th:value="*{detail}"><br> 
+    	 
+    	 <label for="year" class="input-label">加減値（年）</label><br> 
+    	 <input type="number" id="year" name="year" min="-100" max="100" placeholder="0" class="input-box" th:value="*{year}"><br>
+     	 
+     	 <label for="month" class="input-label">加減値（月）</label><br> 
+     	 <input type="number" id="month" name="month" min="-120" max="120" placeholder="0" class="input-box" th:value="*{month}"><br>
+     	 
+     	 <label for="day" class="input-label">加減値（日）</label><br> 
+    	 <input type="number" id="day" name="day" min="-36500" max="3650" placeholder="0" class="input-box" th:value="*{day}"><br> 
+     
+         <input type="reset" value="元に戻す" class="reset-btn"> 
+         <input type="submit" value="　次へ　" class="next-btn"> 
+    </form>
+  </div>
+  
+  <footer>
+    <h1>日付計算アプリ</h1>
+  </footer>
+  
+</body>
+</html>
