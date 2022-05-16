@@ -100,6 +100,22 @@ table th {
   background-color: #afeeee;
 }
 
+.th1,.td1{
+  width: 7%;
+}
+
+.th2,.td2{
+  width: 23%;
+}
+
+.th3,.td3{
+  width: 30%;
+}
+
+.th4,.td4{
+  width: 20%;
+}
+
 .change-btn {
   background-color: #d7003a;
   color: #fff;

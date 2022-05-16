@@ -22,8 +22,22 @@ h2 {
    padding: 10px 0px;
 }
 
-p {
-   margin: 10px 100px 0px 600px;
+p,.span1{
+   margin-top: 5px ;
+   margin-left:500px;
+}
+.detail1{
+   margin-top: 0px ;
+   margin-left:500px;
+   float:  left;
+   
+}
+.detail2 {
+ margin-top: 5px ;
+ margin-bottom: 15px ;
+ margin-left:670px;
+ width:40%;
+ word-break: break-all;
 }
 
 .back-btn {

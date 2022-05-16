@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8" />
-  <title>Date Calculation</title>
-  <link th:href="@{/css/change_confirm_style.css}" rel="stylesheet" type="text/css"> </head>
+  	<meta charset="utf-8" />
+  	<title>Date Calculation</title>
+  	<link th:href="@{/css/change_confirm_style.css}" rel="stylesheet" type="text/css"> </head>
 <body>
-  <header>
+<header>
     <a href="/calculation/top" class="back">TOPへ戻る</a>
     <h2>更新内容の確認</h2>
-  </header>
-  <div class="form-area" th:object="${formulaData}">
-    <p th:text="'　　　　ＩＤ：'+*{id}"></p>
-    <p th:text="'　　　登録名：'+*{name}"></p>
-    <p th:text="'　　　説　明：'+*{detail}"></p>
-    <p th:text="'加減値（年）：'+*{year}"></p>
-    <p th:text="'加減値（月）：'+*{month}"></p>
-    <p th:text="'加減値（日）：'+*{day}"></p>
-    <form method="post" action="#" th:action="@{/calculation/change/id={id}(id=*{id})}"> 
-    	<input name="id" type="hidden" th:value="*{id}">
-  	  	<input name="name" type="hidden" th:value="*{name}"> 
-  	 	 <input name="detail" type="hidden" th:value="*{detail}"> 
-   	 	 <input name="year" type="hidden" th:value="*{year}"> 
-   	 	 <input name="month" type="hidden" th:value="*{month}">
-   	  	 <input name="day" type="hidden" th:value="*{day}"> 
-   	  	 <input type="submit" value="戻る" class="back-btn">
-    </form>
-    <form method="post" action="#" th:action="@{/calculation/change_complete}">
-   		 <input name="id" type="hidden" th:value="*{id}">
-    	 <input name="name" type="hidden" th:value="*{name}">
-         <input name="detail" type="hidden" th:value="*{detail}">
-     	 <input name="year" type="hidden" th:value="*{year}"> 
-      	 <input name="month" type="hidden" th:value="*{month}"> 
-      	 <input name="day" type="hidden" th:value="*{day}"> 
-      	 <input type="submit" value="更新する" class="register-btn">
-     </form>
-  </div>
-  <footer>
-    <h1>日付計算アプリ</h1>
-  </footer>
+</header>
+  	<div class="form-area" th:object="${formulaData}">
+    		<p th:text="'　　　　ＩＤ：'+*{id}"></p>
+    		<p th:text="'　　　登録名：'+*{name}"></p>
+    		<div class="detail1">　　　説　明：</div><div class="detail2" th:text="*{detail}"></div>
+    		<p th:text="'加減値（年）：'+*{year}"></p>
+    		<p th:text="'加減値（月）：'+*{month}"></p>
+    		<p th:text="'加減値（日）：'+*{day}"></p>
+    	<form method="post" action="#" th:action="@{/calculation/change/id={id}(id=*{id})}"> 
+    		<input name="id" type="hidden" th:value="*{id}">
+  	  		<input name="name" type="hidden" th:value="*{name}"> 
+  	 	 	<input name="detail" type="hidden" th:value="*{detail}"> 
+   	 	 	<input name="year" type="hidden" th:value="*{year}"> 
+   	 	 	<input name="month" type="hidden" th:value="*{month}">
+   	  	 	<input name="day" type="hidden" th:value="*{day}"> 
+   	  	 	<input type="submit" value="戻る" class="back-btn">
+    	</form>
+    	<form method="post" action="#" th:action="@{/calculation/change_complete}">
+   		 	<input name="id" type="hidden" th:value="*{id}">
+    	 	<input name="name" type="hidden" th:value="*{name}">
+         	<input name="detail" type="hidden" th:value="*{detail}">
+     	 	<input name="year" type="hidden" th:value="*{year}"> 
+      	 	<input name="month" type="hidden" th:value="*{month}"> 
+      	 	<input name="day" type="hidden" th:value="*{day}"> 
+      	 	<input type="submit" value="更新する" class="register-btn">
+     	</form>
+</div>
+<footer>
+    	<h1>日付計算アプリ</h1>
+</footer>
 </body>
 </html>

@@ -13,8 +13,8 @@ public class FormulaData {
     @Size(max = 30, message = "30文字以内で登録名を入力して下さい。")
     private String name;
 
-    @NotBlank(message = "100文字以内で登録名を入力して下さい。")
-    @Size(max = 100, message = "100文字以内で説明を入力して下さい。")
+    @NotBlank(message = "50文字以内で登録名を入力して下さい。")
+    @Size(max = 50, message = "50文字以内で説明を入力して下さい。")
     private String detail;
     private int year;
     private int month;
