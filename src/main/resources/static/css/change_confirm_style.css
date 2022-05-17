@@ -24,21 +24,22 @@ h2 {
    padding: 10px 0px;
 }
 
-p,.span1{
+p{
    margin-top: 5px ;
-   margin-left:500px;
+   margin-left:400px;
 }
+
 .detail1{
    margin-top: 0px ;
-   margin-left:500px;
+   margin-left:400px;
    float:  left;
-   
 }
+
 .detail2 {
  margin-top: 5px ;
  margin-bottom: 15px ;
- margin-left:670px;
- width:40%;
+ margin-left:470px;
+ width:50%;
  word-break: break-all;
 }
 
@@ -48,7 +49,7 @@ p,.span1{
    border: thin solid #d7003a;
    cursor: pointer;
    font-size: 100%;
-   margin: 10px 10px 10px 1400px;
+   margin: 10px 10px 10px 1100px;
    padding: 10px 10px;
    display: inline-block;
 }
@@ -59,7 +60,7 @@ p,.span1{
    border: none;
    cursor: pointer;
    font-size: 100%;
-   margin: 10px 10px 10px 1400px;
+   margin: 10px 10px 10px 1100px;
    padding: 10px 10px;
    display: inline-block;
 }

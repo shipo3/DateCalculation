@@ -1,6 +1,6 @@
 header {
    color: #745399;
-   height: 130px;
+   height: 120px;
 }
 
 h2{
@@ -41,11 +41,11 @@ h2{
 }
 
 .input-label {
-   margin: 10px 0px 10px 600px;
+   margin: 10px 0px 10px 400px;
 }
 
 .input-box, .input-box-id {
-   margin: 10px 100px 10px 600px;
+   margin: 10px 100px 10px 400px;
    width: 600px;
    height: 30px;
    font-size: 100%;
@@ -62,7 +62,7 @@ h2{
    border: thin solid #d7003a;
    cursor: pointer;
    font-size: 100%;
-   margin: 10px 10px 10px 1400px;
+   margin: 10px 10px 10px 1100px;
    padding       : 10px 10px;
    display       : inline-block;
 }
@@ -73,7 +73,7 @@ h2{
    border: none;
    cursor: pointer;
    font-size: 100%;
-   margin: 10px 10px 10px 1400px;
+   margin: 10px 10px 10px 1100px;
    padding       : 10px 10px;
    display       : inline-block;
 }

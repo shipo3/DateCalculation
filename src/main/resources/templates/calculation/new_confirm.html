@@ -11,7 +11,7 @@
  </header>
   	<div class="form-area" th:object="${formulaData}">
     		<p th:text="'　　　登録名：'+*{name}"></p>
-    		<p th:text="'　　　説明　：'+*{detail}"></p>
+    		<div class="detail1">　　　説　明：</div><div class="detail2" th:text="*{detail}"></div>
     		<p th:text="'加減値（年）：'+*{year}"></p>
     		<p th:text="'加減値（月）：'+*{month}"></p>
     		<p th:text="'加減値（日）：'+*{day}"></p>

@@ -1,6 +1,6 @@
 header {
  color: #745399;
-height: 130px;
+height: 100px;
 }
 h2 {
 margin: 30px 20px 0px 1000px;
@@ -36,10 +36,10 @@ color: #d7003a;
 }
 
 .input-label {
- margin: 10px 0px 10px 600px;
+ margin: 10px 0px 10px 400px;
 }
 .input-box {
- margin: 10px 100px 10px 600px;
+ margin: 10px 0px 10px 400px;
  width: 600px;
  height: 30px;
   font-size: 100%;
@@ -51,7 +51,7 @@ color: #d7003a;
 border: thin solid #d7003a;
 cursor: pointer;
 font-size: 100%;
-margin: 10px 10px 10px 1400px;
+margin: 10px 10px 10px 1100px;
 padding       : 10px 10px;
    display       : inline-block;
 }
@@ -61,7 +61,7 @@ padding       : 10px 10px;
  border: none;
 cursor: pointer;
 font-size: 100%;
-margin: 10px 10px 10px 1400px;
+margin: 10px 10px 10px 1100px;
 padding       : 10px 10px;
    display       : inline-block;
 }

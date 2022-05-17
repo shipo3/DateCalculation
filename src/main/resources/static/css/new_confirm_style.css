@@ -1,18 +1,20 @@
 header {
   color: #745399;
-  height: 130px;
+  height: 120px;
 }
 
 .back {
-  font-size: 150%;
-  float: left;
-  margin: 20px 1000px 20px 30px;
-  text-decoration: none;
-  font-weight: bold;
+    font-size: 150%;
+    float: left;
+    margin: 25px 0px 20px 30px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 h2 {
-  margin: 20px 50px 20px 300px;
+   margin: 20px 0px 0px 1000px;
+    font-size: 180%;
+    font-weight: bold;
 }
 
 .form-area {
@@ -22,8 +24,23 @@ h2 {
   padding: 10px 0px;
 }
 
-p {
-  margin: 10px 100px 0px 600px;
+p{
+   margin-top: 5px ;
+   margin-left:400px;
+}
+
+.detail1{
+   margin-top: 0px ;
+   margin-left:400px;
+   float:  left;
+}
+
+.detail2 {
+ margin-top: 5px ;
+ margin-bottom: 15px ;
+ margin-left:470px;
+ width:50%;
+ word-break: break-all;
 }
 
 .back-btn {
@@ -32,7 +49,7 @@ p {
   border: thin solid #d7003a;
   cursor: pointer;
   font-size: 100%;
-  margin: 10px 10px 10px 1400px;
+  margin: 10px 10px 10px 1100px;
   padding: 10px 10px;
   display: inline-block;
 }
@@ -43,7 +60,7 @@ p {
   border: none;
   cursor: pointer;
   font-size: 100%;
-  margin: 10px 10px 10px 1400px;
+  margin: 10px 10px 10px 1100px;
   padding: 10px 10px;
   display: inline-block;
 }
