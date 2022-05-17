@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,10 @@ public class DateCalculationController {
 	// DBに入っている既存の計算式を表示させる
 	List<FormulaData> formulaDataList = dateCalculationService.getAll();
 	System.out.println(formulaDataList);
+	if (CollectionUtils.isEmpty(formulaDataList)) {
+	    String error = "登録されている計算式はありません。";
+	    model.addAttribute("noDataError", error);
+	}
 	model.addAttribute("fdList", formulaDataList);
 	return "calculation/top";
     }
@@ -102,7 +107,7 @@ public class DateCalculationController {
     // top.htmlにて[更新]押下時にchange.htmlを表示
     @GetMapping("/change/id={id}")
     public String change(@PathVariable("id") int id, Model model) {
-	System.out.println("a");
+//	System.out.println("a");	
 	model.addAttribute("formulaData", dateCalculationService.getOne(id));
 	return "calculation/change";
     }

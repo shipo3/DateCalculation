@@ -1,16 +1,18 @@
 header {
    color: #745399;
-   height: 120px;
+   height: 130px;
 }
 
 h2{
-   margin: 30px 20px 0px 1000px;
+   margin: 20px 0px 0px 1000px;
+   font-size: 180%;
+   font-weight: bold;
 }
 
 .back {
    font-size: 150%;
    float:left;
-   margin: 0px 50px 0px 30px;
+   margin: 0px 0px 20px 30px;
    text-decoration: none;
    font-weight: bold;
 }

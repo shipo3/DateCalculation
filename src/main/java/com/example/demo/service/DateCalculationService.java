@@ -21,6 +21,9 @@ public class DateCalculationService {
 //DB処理
 //select1件
     public FormulaData getOne(int id) {
+
+//	FormulaData formulaData = new FormulaData();
+//	formulaData.setId(id);
 	return dateCalculationMapper.findOne(id);
     }
 

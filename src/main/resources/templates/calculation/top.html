@@ -21,6 +21,7 @@
         	<span th:text="${complete}" class="complete-message"></span>
   	</div>
   	<div class="result-table">
+  	        <p th:text="${noDataError}" class="no-data-message"></p>	
     	<table class="table1">
       		<tr>
         			<th class="th1">ID</th>
@@ -28,7 +29,7 @@
         			<th class="th3">説明</th>
         			<th class="th4">計算式（年/月/日）</th>
         			<th>変更</th>
-        			<th>削除</th>
+        			<th>削除</th>	
       		</tr>
       		<tr th:each="fd : ${fdList}" th:object="${fd}">
         			<td th:text="*{id}" class="td1"></td>
