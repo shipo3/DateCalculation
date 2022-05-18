@@ -51,7 +51,7 @@ body {
    color: #d7003a;
    font-weight: bold;
    font-size: 120%;
-   margin-left: 100px;
+   margin-left: 50px;
 }
 
 .result-head {
@@ -71,21 +71,16 @@ body {
 
 h3 {
   color: #17184b;
-  margin: 30px 0px 10px 300px;
+  margin: 30px 0px 10px 200px;
   border-bottom: medium solid #d7003a;
   display: inline-block
-}
-
-.no-data-message{
-  margin: 30px 0px 30px 130px;
-  font-size: 18px;
 }
 
 .table1 {
   width: 70%;
   border-collapse: collapse;
   font-size: 18px;
-  margin-left: 50px;
+  margin-left: 100px;
 }
 
 .table2 {

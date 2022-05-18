@@ -34,7 +34,7 @@ public class DateCalculationController {
 	System.out.println(formulaDataList);
 	if (CollectionUtils.isEmpty(formulaDataList)) {
 	    String error = "登録されている計算式はありません。";
-	    model.addAttribute("noDataError", error);
+	    model.addAttribute("complete", error);
 	}
 	model.addAttribute("fdList", formulaDataList);
 	return "calculation/top";

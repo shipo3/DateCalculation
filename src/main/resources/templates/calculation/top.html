@@ -22,7 +22,6 @@
         	<span th:text="${complete}" class="complete-message"></span>
   	</div>
   	<div class="result-table">
-  	        <p th:text="${noDataError}" class="no-data-message"></p>	
     	<table class="table1">
       		<tr>
         			<th class="th1">ID</th>
@@ -45,7 +44,7 @@
         		</td>
         		<td>
          			<form th:method="post" th:action="@{/calculation/delete/id={id}(id=*{id})}">
-         				<button class="delete-btn" onclick="confirmFunction1()">削除</button>
+         				<button class="delete-btn" onclick="confirmFunction()">削除</button>
          			</form>
          		</td>
       		</tr>
