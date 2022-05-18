@@ -107,8 +107,9 @@ public class DateCalculationController {
     // top.htmlにて[更新]押下時にchange.htmlを表示
     @GetMapping("/change/id={id}")
     public String change(@PathVariable("id") int id, Model model) {
-	System.out.println("a");
-	model.addAttribute("formulaData", dateCalculationService.getOne(id));
+	FormulaData fd = dateCalculationService.getOne(id);
+	System.out.println(fd);
+	model.addAttribute("formulaData", fd);
 	return "calculation/change";
     }
 
