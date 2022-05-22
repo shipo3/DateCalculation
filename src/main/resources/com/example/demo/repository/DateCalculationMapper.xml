@@ -13,21 +13,22 @@
     <result column="day" property="day" ></result>
   </resultMap>
 
-  <select id="findOne" resultMap="formulaData">select *
-    from    formula    where   id = #{id}</select>
+  <select id="findOne" resultMap="formulaData">
+  select *   from    formula    where   id = #{id}</select>
 
-  <select id="findAll" resultType="com.example.demo.domain.FormulaData">select  *
-    from    formula</select>
+  <select id="findAll" resultType="com.example.demo.domain.FormulaData">
+  select  *    from    formula</select>
 
-  <insert id="insertOne" useGeneratedKeys="true" keyProperty="id">insert into formula ( id,name, detail, year, month, day ) values (
-#{id}, #{name}, #{detail}, #{year}, #{month}, #{day} )</insert>
+  <insert id="insertOne" useGeneratedKeys="true" keyProperty="id">
+  insert into formula ( id,name, detail, year, month, day )
+  values (#{id}, #{name}, #{detail}, #{year}, #{month}, #{day} )</insert>
 
-  <update id="updateOne">update  formula    set   id =#{id},  name = #{name},
-  detail = #{detail}
-,  year = #{year},   month = #{month},  day = #{day}   where   id = #{id}</update>
+  <update id="updateOne">
+  update  formula    set   id =#{id},  name = #{name},
+  detail = #{detail},  year = #{year},   month = #{month},  day = #{day}   where   id = #{id}</update>
 
-  <delete id="deleteOne">delete from
- formula   where
-        id = #{id}</delete>
+  <delete id="deleteOne">
+  delete from  formula   where   id = #{id}</delete>
 
   </mapper>
+  

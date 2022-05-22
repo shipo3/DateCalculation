@@ -1,71 +1,70 @@
 header {
-   color: #745399;
-   height: 130px;
-}
-
-.back {
-    font-size: 150%;
-    float: left;
-    margin: 25px 0px 20px 30px;
-    text-decoration: none;
-    font-weight: bold;
+  color: #eb6101;
+  height: 90px;
 }
 
 h2 {
-   margin: 20px 0px 0px 1000px;
-    font-size: 180%;
-    font-weight: bold;
+  margin: 30px 20px 0px 1000px;
+}
+
+.back {
+  font-size: 150%;
+  float: left;
+  margin: 30px 50px 0px 30px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #a59aca;
 }
 
 .form-area {
-   background-color: #745399;
-   color: #fff;
-   font-size: 150%;
-   padding: 10px 0px;
+  background-color: #a59aca;
+  color: #fff;
+  font-size: 150%;
+  padding: 10px 0px;
 }
 
 p{
-   margin-top: 5px ;
-   margin-left:400px;
+  margin-top: 5px ;
+  margin-left:400px;
 }
 
 .detail1{
-   margin-top: 0px ;
-   margin-left:400px;
-   float:  left;
+  margin-top: 0px ;
+  margin-left:400px;
+  float:  left;
 }
 
 .detail2 {
- margin-top: 5px ;
- margin-bottom: 15px ;
- margin-left:470px;
- width:50%;
- word-break: break-all;
+  margin-top: 5px ;
+  margin-bottom: 15px ;
+  margin-left:470px;
+  width:50%;
+  word-break: break-all;
 }
 
 .back-btn {
-   background-color: #fff;
-   color: #d7003a;
-   border: thin solid #d7003a;
-   cursor: pointer;
-   font-size: 100%;
-   margin: 10px 10px 10px 1100px;
-   padding: 10px 10px;
-   display: inline-block;
+  background-color: #fff;
+  color: #eb6101;
+  border: thin solid #eb6101;
+  cursor: pointer;
+  font-size: 90%;
+  margin: 10px 10px 10px 1100px;
+  padding: 10px 10px;
+  display: inline-block;
 }
 
 .register-btn {
-   background-color: #d7003a;
-   color: #fff;
-   border: none;
-   cursor: pointer;
-   font-size: 100%;
-   margin: 10px 10px 10px 1100px;
-   padding: 10px 10px;
-   display: inline-block;
+  background-color: #eb6101;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 90%;
+  margin: 10px 10px 10px 1100px;
+  padding: 10px 10px;
+  display: inline-block;
 }
 
 h1 {
-   margin-left: 30px;
-   color: #745399;
+  margin-left: 30px;
+  color: #a59aca;
 }
