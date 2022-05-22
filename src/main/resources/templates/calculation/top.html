@@ -38,12 +38,12 @@
         			<td th:text="*{year} + '　/　' + *{month} + '　/　' +*{day} " class="td4"></td>
         			
         		<td>
-        			<form th:method="post" th:action="@{/calculation/change/id={id}(id=*{id})}">
+        			<form th:method="GET" th:action="@{/calculation/change/id={id}(id=*{id})}">
         				<button class="change-btn">更新</button>
         			</form>
         		</td>
         		<td>
-         			<form th:method="post" th:action="@{/calculation/delete/id={id}(id=*{id})}">
+         			<form th:method="POST" th:action="@{/calculation/delete/id={id}(id=*{id})}">
          				<button class="delete-btn" onclick="confirmFunction()">削除</button>
          			</form>
          		</td>

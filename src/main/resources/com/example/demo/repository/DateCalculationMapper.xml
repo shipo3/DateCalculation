@@ -13,7 +13,7 @@
     <result column="day" property="day" ></result>
   </resultMap>
 
-  <select id="findOne" resultMap="formulaData">select  *
+  <select id="findOne" resultMap="formulaData">select *
     from    formula    where   id = #{id}</select>
 
   <select id="findAll" resultType="com.example.demo.domain.FormulaData">select  *

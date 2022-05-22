@@ -107,15 +107,8 @@ public class DateCalculationController {
     // top.htmlにて[更新]押下時にchange.htmlを表示
     @GetMapping("/change/id={id}")
     public String change(@PathVariable("id") int id, Model model) {
-	FormulaData fd = dateCalculationService.getOne(id);
-	System.out.println(fd);
-	model.addAttribute("formulaData", fd);
-	return "calculation/change";
-    }
-
-    // 確認画面から戻った時
-    @PostMapping("/change/id={id}")
-    public String changeback(FormulaData formulaData, Model model) {
+	System.out.println(dateCalculationService.getOne(id));
+	model.addAttribute("formulaData", dateCalculationService.getOne(id));
 	return "calculation/change";
     }
 
@@ -127,6 +120,12 @@ public class DateCalculationController {
 	}
 	// 入力エラーなければ確認画面へ進む
 	return "calculation/change_confirm";
+    }
+
+    // 確認画面から戻った時
+    @PostMapping("/change/id={id}")
+    public String changeback(FormulaData formulaData, Model model) {
+	return "calculation/change";
     }
 
 //確認画面にて「更新する」押下時　エラーがなければDBに更新登録してchnge.htmlに戻る
