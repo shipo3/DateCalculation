@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -51,8 +53,14 @@ public class DateCalculationController {
 	    return "calculation/top";
 	}
 	// 入力日がある場合は計算処理を行い結果出力する
-	List<String> re = dateCalculationService.dateAdjust(inputDate);
-	model.addAttribute("resultList", re);
+	List<LocalDate> resultList = dateCalculationService.dateAdjust(inputDate);
+	// リストから取り出してyyyy/MM/ddのフォーマットにする
+	for (LocalDate result : resultList) {
+	    result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+	    // リストに戻す
+	    resultList.add(result);
+	}
+	model.addAttribute("resultList", resultList);
 	String inputDate2 = inputDate.replace("-", "/");
 	model.addAttribute("id", inputDate2);
 

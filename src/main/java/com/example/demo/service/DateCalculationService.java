@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,22 +44,26 @@ public class DateCalculationService {
     }
 
     // 日付の加減計算処理
-    public List<String> dateAdjust(String inputDate) {
+    public List<LocalDate> dateAdjust(String inputDate) {
 	// inputにて取得した日付をLocalDate型にする
 	LocalDate ld = LocalDate.parse(inputDate);
 	// 結果を入れるリストを作る
-	List<String> resultList = new ArrayList<String>();
+//	List<String> resultList = new ArrayList<String>();
+	List<LocalDate> resultList = new ArrayList<LocalDate>();
 
 	// DBの計算式が入ったデータを取得する
 	List<FormulaData> formulaDatas = dateCalculationMapper.findAll();
 	// 取得したデータから取り出して日付をプラスする
-	for (FormulaData fd : formulaDatas) {
-	    LocalDate result1 = ld.plusYears(fd.getYear()).plusMonths(fd.getMonth()).plusDays(fd.getDay());
-	    // 計算結果をStringに戻す
-	    String result2 = result1.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-	    // 結果リストに格納する
-	    resultList.add(result2);
-	}
+	resultList = formulaDatas
+		.forEach(fd -> ld.plusYears(fd.getYear()).plusMonths(fd.getMonth()).plusDays(fd.getDay()));
+
+//	for (FormulaData fd : formulaDatas) {
+//	    LocalDate result1 = ld.plusYears(fd.getYear()).plusMonths(fd.getMonth()).plusDays(fd.getDay());	 
+	// 計算結果をStringに戻す
+//	    String result2 = result1.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+	// 結果リストに格納する
+//	    resultList.add(result2);
+//	}
 	return resultList;
     }
 }
