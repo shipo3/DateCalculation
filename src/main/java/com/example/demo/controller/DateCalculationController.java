@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -59,14 +60,15 @@ public class DateCalculationController {
 	// 入力日がある場合は計算処理を行い結果出力する
 	List<LocalDate> resultList = dateCalculationService.dateAdjust(inputDate);
 	System.out.println(resultList);
-	// リストから取り出してyyyy/MM/ddのフォーマットにする
+	List<String> resultList2 = new ArrayList<String>();
+
+	// LocalDateリストから取り出してyyyy/MM/ddのフォーマットにする
 	for (LocalDate result : resultList) {
-	    result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-	    // リストに戻す
-	    resultList.add(result);
+	    String result2 = result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+	    // Stringリストに戻す
+	    resultList2.add(result2);
 	}
-	System.out.println(resultList);
-	model.addAttribute("resultList", resultList);
+	model.addAttribute("resultList", resultList2);
 
 	// 入力された基準日の表示
 	String inputDate2 = inputDate.replace("-", "/");

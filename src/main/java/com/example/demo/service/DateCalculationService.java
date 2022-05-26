@@ -49,7 +49,6 @@ public class DateCalculationService {
 	// inputにて取得した日付をLocalDate型にする
 	LocalDate ld = LocalDate.parse(inputDate);
 	// 結果を入れるリストを作る
-//	List<String> resultList = new ArrayList<String>();
 	List<LocalDate> resultList = new ArrayList<LocalDate>();
 
 	// DBの計算式が入ったデータを取得する
