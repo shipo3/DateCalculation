@@ -50,20 +50,28 @@ public class DateCalculationController {
 	    model.addAttribute("inputError", error);
 	    inputDate = "　";
 	    model.addAttribute("id", inputDate);
+	    // 計算式の取得表示
+	    List<FormulaData> formulaDataList = dateCalculationService.getAll();
+	    model.addAttribute("fdList", formulaDataList);
+
 	    return "calculation/top";
 	}
 	// 入力日がある場合は計算処理を行い結果出力する
 	List<LocalDate> resultList = dateCalculationService.dateAdjust(inputDate);
+	System.out.println(resultList);
 	// リストから取り出してyyyy/MM/ddのフォーマットにする
 	for (LocalDate result : resultList) {
 	    result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 	    // リストに戻す
 	    resultList.add(result);
 	}
+	System.out.println(resultList);
 	model.addAttribute("resultList", resultList);
+
+	// 入力された基準日の表示
 	String inputDate2 = inputDate.replace("-", "/");
 	model.addAttribute("id", inputDate2);
-
+	// 計算式の取得表示
 	List<FormulaData> formulaDataList = dateCalculationService.getAll();
 	System.out.println(formulaDataList);
 	model.addAttribute("fdList", formulaDataList);
