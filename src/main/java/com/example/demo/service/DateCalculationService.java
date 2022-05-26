@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -54,16 +55,11 @@ public class DateCalculationService {
 	// DBの計算式が入ったデータを取得する
 	List<FormulaData> formulaDatas = dateCalculationMapper.findAll();
 	// 取得したデータから取り出して日付をプラスする
-	resultList = formulaDatas
-		.forEach(fd -> ld.plusYears(fd.getYear()).plusMonths(fd.getMonth()).plusDays(fd.getDay()));
+	// Collection の中身を利用して、何かの値を作成し、リストに変換
+	resultList = formulaDatas.stream()
+		.map(fd -> ld.plusYears(fd.getYear()).plusMonths(fd.getMonth()).plusDays(fd.getDay()))
+		.collect(Collectors.toList());
 
-//	for (FormulaData fd : formulaDatas) {
-//	    LocalDate result1 = ld.plusYears(fd.getYear()).plusMonths(fd.getMonth()).plusDays(fd.getDay());	 
-	// 計算結果をStringに戻す
-//	    String result2 = result1.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-	// 結果リストに格納する
-//	    resultList.add(result2);
-//	}
 	return resultList;
     }
 }
