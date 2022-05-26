@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -11,7 +12,7 @@ import com.example.demo.domain.FormulaData;
 public interface DateCalculationMapper {
     List<FormulaData> findAll();
 
-    public FormulaData findOne(int id);
+    public Optional<FormulaData> findOne(int id);
 
     public void insertOne(FormulaData fd);
 

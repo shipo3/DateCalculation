@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class DateCalculationService {
 
 //DB処理
 //select1件
-    public FormulaData getOne(int id) {
+    public Optional<FormulaData> getOne(int id) {
 	return dateCalculationMapper.findOne(id);
     }
 
