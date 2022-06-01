@@ -91,7 +91,7 @@ public class DateCalculationController {
 
 //確認画面から戻った時
     @PostMapping("/new")
-    public String formback(FormulaData formulaData, Model model) {
+    public String formBack(FormulaData formulaData, Model model) {
 	return "calculation/new";
     }
 
@@ -106,7 +106,7 @@ public class DateCalculationController {
 
     }
 
-//確認画面にて「登録する」押下時　エラーがなければDBに新規登録してnew画面に戻る
+//確認画面にて「登録する」押下時　エラーがなければDBに新規登録してtop画面に戻る
     @PostMapping("/complete")
     public String create(@Validated FormulaData formulaData, BindingResult result, Model model,
 	    RedirectAttributes redirectAttributes) {
@@ -148,13 +148,13 @@ public class DateCalculationController {
 
     // 確認画面から戻った時
     @PostMapping("/change/id={id}")
-    public String changeback(FormulaData formulaData, Model model) {
+    public String changeBack(FormulaData formulaData, Model model) {
 	return "calculation/change";
     }
 
 //確認画面にて「更新する」押下時　エラーがなければDBに更新登録してchnge.htmlに戻る
     @PostMapping("/change_complete")
-    public String upgate(@Validated FormulaData formulaData, BindingResult result, Model model,
+    public String update(@Validated FormulaData formulaData, BindingResult result, Model model,
 	    RedirectAttributes redirectAttributes) {
 
 	if (result.hasErrors()) {
@@ -168,8 +168,7 @@ public class DateCalculationController {
 	return "redirect:/calculation/top";
     }
 
-    // calculation.htmlにて[削除]押下
-
+    // calculation.htmlにて[削除]押下時、DBから削除する
     @PostMapping("delete/id={id}")
     public String delete(@PathVariable int id, @ModelAttribute FormulaData formulaData,
 	    RedirectAttributes redirectAttributes) {
