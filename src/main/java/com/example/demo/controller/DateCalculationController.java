@@ -82,9 +82,9 @@ public class DateCalculationController {
 	return "calculation/top";
     }
 
-//「新規登録」押下後の画面取得  /　登録完了メッセージ取得
+//「新規登録」押下後の画面取得  
     @GetMapping("/new")
-    public String form(FormulaData formulaData, Model model, @ModelAttribute("complete") String complete) {
+    public String form(FormulaData formulaData, Model model) {
 	model.addAttribute("formuladata", new FormulaData());
 	return "calculation/new";
     }
@@ -92,7 +92,6 @@ public class DateCalculationController {
 //確認画面から戻った時
     @PostMapping("/new")
     public String formback(FormulaData formulaData, Model model) {
-	model.addAttribute("title", "calc_new");
 	return "calculation/new";
     }
 
@@ -100,11 +99,9 @@ public class DateCalculationController {
     @PostMapping("/new_confirm")
     public String confirm(@Validated FormulaData formulaData, BindingResult result, Model model) {
 	if (result.hasErrors()) {
-	    model.addAttribute("title", "calc_new");
 	    return "calculation/new";
 	}
 	// 入力エラーなければ確認画面へ進む
-	model.addAttribute("title", "calc_confirm");
 	return "calculation/new_confirm";
 
     }
