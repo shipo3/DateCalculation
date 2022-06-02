@@ -96,13 +96,13 @@ public class DateCalculationController {
     }
 
 //新規登録にて「次へ」押下時　バリデーションチェック行なう
-    @PostMapping("/new_confirm")
+    @PostMapping("/new-confirm")
     public String confirm(@Validated FormulaData formulaData, BindingResult result, Model model) {
 	if (result.hasErrors()) {
 	    return "calculation/new";
 	}
 	// 入力エラーなければ確認画面へ進む
-	return "calculation/new_confirm";
+	return "calculation/new-confirm";
 
     }
 
@@ -137,13 +137,13 @@ public class DateCalculationController {
     }
 
     // change.htmlにて[次へ]押下時 バリデーションチェック行なう
-    @PostMapping("/change_confirm")
+    @PostMapping("/change-confirm")
     public String changeConfirm(@Validated FormulaData formulaData, BindingResult result, Model model) {
 	if (result.hasErrors()) {
 	    return "calculation/change";
 	}
 	// 入力エラーなければ確認画面へ進む
-	return "calculation/change_confirm";
+	return "calculation/change-confirm";
     }
 
     // 確認画面から戻った時
@@ -153,7 +153,7 @@ public class DateCalculationController {
     }
 
 //確認画面にて「更新する」押下時　エラーがなければDBに更新登録してchnge.htmlに戻る
-    @PostMapping("/change_complete")
+    @PostMapping("/change-complete")
     public String update(@Validated FormulaData formulaData, BindingResult result, Model model,
 	    RedirectAttributes redirectAttributes) {
 
