@@ -21,7 +21,7 @@
 
 ## URL設計
 
-![URL_design](images/URL_design.mp4)
+![URL_design](images/URL_design.)
 
 ## 使用技術
 * Java 11
