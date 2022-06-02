@@ -5,7 +5,7 @@
 入力した基準日を元にDB内にある計算式にて日付を計算するアプリです。<br>
 計算式の新規登録、更新、削除機能があります。
 
-![demo_video](images/demo_video.mp4)
+![demo_video](images/demo_video.gif)
 
 ## 機能一覧
 * 計算式の一覧表示
