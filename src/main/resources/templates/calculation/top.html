@@ -7,16 +7,16 @@
   	<script th:src="@{/js/delete.js}"></script> 
 </head>
 <body>
-  	<div class="input-date">
-   		<form method="post" action="#" th:action="@{/calculation/top}">
-      		<h2><label for="inputDate" class="input-text">基準となる日付を入力して下さい</label></h2>
-      	 	<input type="date" id="inputDate" name="inputDate"> 
-      		<input type="submit" value="計算する" class="calc-btn"> 
-      		<input type="reset" value="リセットする" class="reset-btn">
-      		<p class="input-error" th:text="${inputError}"></p>
-    	</form>
-  	</div>
-  	<div class="result-head">
+	<div class="input-date">
+		<form method="post" action="#" th:action="@{/calculation/top}">
+			<h2><label for="inputDate" class="input-text">基準となる日付を入力して下さい</label></h2>
+			<input type="date" id="inputDate" name="inputDate">
+			<input type="submit" value="計算する" class="calc-btn">
+			<input type="reset" value="リセットする" class="reset-btn">
+			<p class="input-error" th:text="${inputError}"></p>
+		</form>
+	</div>
+	<div class="result-head">
     		<h3>入力した基準日：<span class="id" th:text="${id}"></span></h3> 
     		<a th:href="@{'/calculation/new'}" class="new-btn">新規登録</a>
         	<span th:text="${complete}" class="complete-message"></span>
@@ -59,8 +59,8 @@
     	</table>
   	</div>
   	<div class="result-bottom"> 余白<br> 余白<br> </div>
- <footer>
-    	<h1>日付計算アプリ</h1>
-</footer>
+  	<footer>
+  			<h1>日付計算アプリ</h1>
+  	</footer>
 </body>
 </html>

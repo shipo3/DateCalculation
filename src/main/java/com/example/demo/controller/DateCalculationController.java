@@ -45,7 +45,7 @@ public class DateCalculationController {
     }
 
     @PostMapping("/top")
-    public String postTop(@RequestParam("inputDate") String inputDate, Model model) {
+    public String calculationResult(@RequestParam("inputDate") String inputDate, Model model) {
 	// 入力日が空の場合はエラーを出す
 	if (inputDate.isEmpty()) {
 	    String error = "＊基準日を入力して下さい。";
@@ -82,20 +82,20 @@ public class DateCalculationController {
 	return "calculation/top";
     }
 
-//「新規登録」押下後の画面取得  
+    // 「新規登録」押下後の画面取得
     @GetMapping("/new")
     public String form(FormulaData formulaData, Model model) {
 	model.addAttribute("formuladata", new FormulaData());
 	return "calculation/new";
     }
 
-//確認画面から戻った時
+    // 確認画面から戻った時
     @PostMapping("/new")
     public String formBack(FormulaData formulaData, Model model) {
 	return "calculation/new";
     }
 
-//新規登録にて「次へ」押下時　バリデーションチェック行なう
+    // 新規登録にて「次へ」押下時 バリデーションチェック行なう
     @PostMapping("/new-confirm")
     public String confirm(@Validated FormulaData formulaData, BindingResult result, Model model) {
 	if (result.hasErrors()) {
@@ -103,10 +103,9 @@ public class DateCalculationController {
 	}
 	// 入力エラーなければ確認画面へ進む
 	return "calculation/new-confirm";
-
     }
 
-//確認画面にて「登録する」押下時　エラーがなければDBに新規登録してtop画面に戻る
+    // 確認画面にて「登録する」押下時 エラーがなければDBに新規登録してtop画面に戻る
     @PostMapping("/complete")
     public String create(@Validated FormulaData formulaData, BindingResult result, Model model,
 	    RedirectAttributes redirectAttributes) {
@@ -152,7 +151,7 @@ public class DateCalculationController {
 	return "calculation/change";
     }
 
-//確認画面にて「更新する」押下時　エラーがなければDBに更新登録してchnge.htmlに戻る
+    // 確認画面にて「更新する」押下時 エラーがなければDBに更新登録してchnge.htmlに戻る
     @PostMapping("/change-complete")
     public String update(@Validated FormulaData formulaData, BindingResult result, Model model,
 	    RedirectAttributes redirectAttributes) {
@@ -176,5 +175,4 @@ public class DateCalculationController {
 	redirectAttributes.addFlashAttribute("complete", "削除完了しました。");
 	return "redirect:/calculation/top";
     }
-
 }

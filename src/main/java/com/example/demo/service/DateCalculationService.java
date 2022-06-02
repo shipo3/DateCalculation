@@ -19,13 +19,13 @@ public class DateCalculationService {
 	this.dateCalculationMapper = dateCalculationMapper;
     }
 
-//DB処理
-//select1件
+    // DB処理
+    // select1件
     public Optional<FormulaData> getOne(int id) {
 	return dateCalculationMapper.findOne(id);
     }
 
-//select全件
+    // select全件
     public List<FormulaData> getAll() {
 	return dateCalculationMapper.findAll();
     }

@@ -18,21 +18,21 @@
     		<p th:text="'加減値（日）：'+*{day}"></p>
     	<form method="post" action="#" th:action="@{/calculation/change/id={id}(id=*{id})}"> 
     		<input name="id" type="hidden" th:value="*{id}">
-  	  		<input name="name" type="hidden" th:value="*{name}"> 
-  	 	 	<input name="detail" type="hidden" th:value="*{detail}"> 
-   	 	 	<input name="year" type="hidden" th:value="*{year}"> 
-   	 	 	<input name="month" type="hidden" th:value="*{month}">
-   	  	 	<input name="day" type="hidden" th:value="*{day}"> 
-   	  	 	<input type="submit" value="戻る" class="back-btn">
+    		<input name="name" type="hidden" th:value="*{name}"> 
+    		<input name="detail" type="hidden" th:value="*{detail}"> 
+    		<input name="year" type="hidden" th:value="*{year}"> 
+    		<input name="month" type="hidden" th:value="*{month}">
+    		<input name="day" type="hidden" th:value="*{day}">
+    		<input type="submit" value="戻る" class="back-btn">
     	</form>
     	<form method="post" action="#" th:action="@{/calculation/change-complete}">
-   		 	<input name="id" type="hidden" th:value="*{id}">
-    	 	<input name="name" type="hidden" th:value="*{name}">
-         	<input name="detail" type="hidden" th:value="*{detail}">
-     	 	<input name="year" type="hidden" th:value="*{year}"> 
-      	 	<input name="month" type="hidden" th:value="*{month}"> 
-      	 	<input name="day" type="hidden" th:value="*{day}"> 
-      	 	<input type="submit" value="更新する" class="register-btn">
+    		<input name="id" type="hidden" th:value="*{id}">
+    		<input name="name" type="hidden" th:value="*{name}">
+    		<input name="detail" type="hidden" th:value="*{detail}">
+    		<input name="year" type="hidden" th:value="*{year}"> 
+    		<input name="month" type="hidden" th:value="*{month}"> 
+    		<input name="day" type="hidden" th:value="*{day}"> 
+    		<input type="submit" value="更新する" class="register-btn">
      	</form>
 </div>
 <footer>
