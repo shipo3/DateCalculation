@@ -35,7 +35,6 @@ public class DateCalculationController {
     public String getFormulaData(Model model) {
 	// DBに入っている既存の計算式を表示させる
 	List<FormulaData> formulaDataList = dateCalculationService.getAll();
-	System.out.println(formulaDataList);
 	if (CollectionUtils.isEmpty(formulaDataList)) {
 	    String error = "登録されている計算式はありません。";
 	    model.addAttribute("complete", error);
@@ -60,7 +59,6 @@ public class DateCalculationController {
 	}
 	// 入力日がある場合は計算処理を行い結果出力する
 	List<LocalDate> resultList = dateCalculationService.dateAdjust(inputDate);
-	System.out.println(resultList);
 	List<String> resultList2 = new ArrayList<String>();
 
 	// LocalDateリストから取り出してyyyy/MM/ddのフォーマットにする
