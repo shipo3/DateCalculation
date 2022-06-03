@@ -87,11 +87,12 @@ public class DateCalculationController {
 	return "calculation/new";
     }
 
-    // 確認画面から戻った時
-    @PostMapping("/new")
-    public String formBack(FormulaData formulaData, Model model) {
-	return "calculation/new";
-    }
+    /*
+     * 確認画面から戻った時
+     * 
+     * @PostMapping("/new") public String formBack(FormulaData formulaData, Model
+     * model) { return "calculation/new"; }
+     */
 
     // 新規登録にて「次へ」押下時 バリデーションチェック行なう
     @PostMapping("/new-confirm")

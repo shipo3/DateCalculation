@@ -15,7 +15,7 @@
     		<p th:text="'加減値（年）：'+*{year}"></p>
     		<p th:text="'加減値（月）：'+*{month}"></p>
     		<p th:text="'加減値（日）：'+*{day}"></p>
-    	<form method="post" action="#" th:action="@{/calculation/new}"> 
+    	<form method="get" action="#" th:action="@{/calculation/new}"> 
     		<input name="name" type="hidden" th:value="*{name}"> 
     		<input name="detail" type="hidden" th:value="*{detail}"> 
     		<input name="year" type="hidden" th:value="*{year}"> 
