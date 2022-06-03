@@ -1,10 +1,10 @@
 package com.example.demo.controller;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,24 +57,21 @@ public class DateCalculationController {
 
 	    return "calculation/top";
 	}
-	// 入力日がある場合は計算処理を行い結果出力する
-	List<LocalDate> resultList = dateCalculationService.dateAdjust(inputDate);
-	List<String> resultList2 = new ArrayList<String>();
+	// 結果を入れるリストを作る
+	List<String> resultList = new ArrayList<String>();
 
+	// 入力日がある場合は計算処理を行い結果出力する
 	// LocalDateリストから取り出してyyyy/MM/ddのフォーマットにする
-	for (LocalDate result : resultList) {
-	    String result2 = result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-	    // Stringリストに戻す
-	    resultList2.add(result2);
-	}
-	model.addAttribute("resultList", resultList2);
+	resultList = dateCalculationService.dateAdjust(inputDate).stream()
+		.map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).collect(Collectors.toList());
+
+	model.addAttribute("resultList", resultList);
 
 	// 入力された基準日の表示
 	String inputDate2 = inputDate.replace("-", "/");
 	model.addAttribute("id", inputDate2);
 	// 計算式の取得表示
 	List<FormulaData> formulaDataList = dateCalculationService.getAll();
-	System.out.println(formulaDataList);
 	model.addAttribute("fdList", formulaDataList);
 
 	return "calculation/top";
@@ -86,13 +83,6 @@ public class DateCalculationController {
 	model.addAttribute("formuladata", new FormulaData());
 	return "calculation/new";
     }
-
-    /*
-     * 確認画面から戻った時
-     * 
-     * @PostMapping("/new") public String formBack(FormulaData formulaData, Model
-     * model) { return "calculation/new"; }
-     */
 
     // 新規登録にて「次へ」押下時 バリデーションチェック行なう
     @PostMapping("/new-confirm")
