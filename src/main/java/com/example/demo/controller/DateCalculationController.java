@@ -49,7 +49,7 @@ public class DateCalculationController {
 	if (inputDate.isEmpty()) {
 	    String error = "＊基準日を入力して下さい。";
 	    model.addAttribute("inputError", error);
-	    inputDate = "　";
+	    inputDate = "                    ";
 	    model.addAttribute("id", inputDate);
 	    // 計算式の取得表示
 	    List<FormulaData> formulaDataList = dateCalculationService.getAll();

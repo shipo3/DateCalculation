@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <title>Date Calculation</title>
   <link th:href="@{/css/new_style.css}" rel="stylesheet" type="text/css">
+  <script th:src="@{/js/new.js}"></script> 
 </head>
 <body>
 	<header>
@@ -13,11 +14,11 @@
  	<div class="form-area">
  		<form method="post" action="#" th:action="@{/calculation/new-confirm}" th:object="${formulaData}"> 
  		 	<label for="name" class="input-label">登録名を入力して下さい。</label><span class="required">＊</span>
- 		  	<span class="input-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br> 
+ 		  	<span class="input-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" id ="nameError"></span><br> 
  		  	<input type="text" id="name" name="name" max="30" placeholder="登録名" class="input-box" th:value="*{name}"><br>
  		  
  		  	<label for="detail" class="input-label">説明を入力して下さい。　</label><span class="required">＊</span>
- 		  	<span class="input-error" th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></span><br>
+ 		  	<span class="input-error" th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}" id ="detailError"></span><br>
  		  	<input type="text" id="detail" name="detail" max="100" placeholder="説明" class="input-box" th:value="*{detail}"><br>
  		  
  			<label for="year" class="input-label">加減値（年）を選択して下さい。</label><br> 
