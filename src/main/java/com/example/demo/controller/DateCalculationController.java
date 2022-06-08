@@ -94,9 +94,9 @@ public class DateCalculationController {
 	return "calculation/new-confirm";
     }
 
-    // 登録完了後確認画面に戻れないようにする
+    // パス指定で確認画面にアクセス時TOPに戻す
     @GetMapping("/new-confirm")
-    public String backconfirm() {
+    public String backtop() {
 	return "redirect:/calculation/top";
     }
 
@@ -144,6 +144,12 @@ public class DateCalculationController {
     @PostMapping("/change/id={id}")
     public String changeBack(FormulaData formulaData, Model model) {
 	return "calculation/change";
+    }
+
+    // パス指定で確認画面にアクセス時TOPに戻す
+    @GetMapping("/change-confirm")
+    public String backTop() {
+	return "redirect:/calculation/top";
     }
 
     // 確認画面にて「更新する」押下時 エラーがなければDBに更新登録してchnge.htmlに戻る
