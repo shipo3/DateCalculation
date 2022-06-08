@@ -1,7 +1,8 @@
-//登録ボタン2重クリックを防止する
-const submit_button = document.getElementById("submit_button");
-
-submit_button.onclick = () => {
-    //２度押し防止の実装
-    submit_button.disabled = true;
-};
+//「登録する」「更新する」の連打を防止する
+function delayExec() {
+	setTimeout('double();', 100);
+}
+ function double(){
+	var  submit = document.getElementById("submit_button");
+	submit.disabled=true;
+}

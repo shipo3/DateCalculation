@@ -4,6 +4,7 @@
   	<meta charset="utf-8" />
   	<title>Date Calculation</title>
   	<link th:href="@{/css/change_confirm_style.css}" rel="stylesheet" type="text/css"> 
+  	<script th:src="@{/js/confirm.js}"></script> 
 </head>
 <body>
 <header>
@@ -33,7 +34,7 @@
     		<input name="year" type="hidden" th:value="*{year}"> 
     		<input name="month" type="hidden" th:value="*{month}"> 
     		<input name="day" type="hidden" th:value="*{day}"> 
-    		<input type="submit" value="更新する" class="register-btn">
+    		<input type="submit" value="更新する" class="register-btn" id="submit_button" onClick="delayExec()" >
      	</form>
 </div>
 <footer>
