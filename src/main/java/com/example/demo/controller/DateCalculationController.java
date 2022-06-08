@@ -94,6 +94,12 @@ public class DateCalculationController {
 	return "calculation/new-confirm";
     }
 
+    // 登録完了後確認画面に戻れないようにする
+    @GetMapping("/new-confirm")
+    public String backconfirm() {
+	return "redirect:/calculation/top";
+    }
+
     // 確認画面にて「登録する」押下時 エラーがなければDBに新規登録してtop画面に戻る
     @PostMapping("/complete")
     public String create(@Validated FormulaData formulaData, BindingResult result, Model model,

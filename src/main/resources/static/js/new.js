@@ -1,4 +1,4 @@
- //登録名、説明が入力された時点で未入力エラーを消す
+//登録名、説明が入力された時点で未入力エラーを消す
 window.addEventListener('DOMContentLoaded', function(){
   
   // input要素を取得
