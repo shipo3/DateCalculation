@@ -11,12 +11,29 @@
 		<a href="/calculation/top" class="back">TOPへ戻る</a>
 		<h2>入力内容の確認</h2>
  	</header>
-  	<div class="form-area" th:object="${formulaData}">
-    		<p th:text="'　　　登録名：'+*{name}"></p>
-    		<div class="detail1">　　　説　明：</div><div class="detail2" th:text="*{detail}"></div>
-    		<p th:text="'加減値（年）：'+*{year}"></p>
-    		<p th:text="'加減値（月）：'+*{month}"></p>
-    		<p th:text="'加減値（日）：'+*{day}"></p>
+  	<div  th:object="${formulaData}">
+		<table >
+			<tr>
+				<td class="td1">登録名：</td>
+				<td th:text="*{name}" class="td2"></td>
+			</tr>
+			<tr>
+				<td class="td1">説明：</td>
+				<td th:text="*{detail}" class="td2"></td>
+			</tr>
+			<tr>
+				<td class="td1">加減値（年）：</td>
+				<td th:text="*{year}" class="td2"></td>
+			</tr>
+			<tr>
+				<td class="td1">加減値（月）：</td>
+				<td th:text="*{month}" class="td2"></td>
+			</tr>
+			<tr>
+				<td class="td1">加減値（日）：</td>
+				<td th:text="*{day}" class="td2"></td>
+			</tr>
+		</table>
     	<form method="get" action="#" th:action="@{/calculation/new}"> 
     		<input name="name" type="hidden" th:value="*{name}"> 
     		<input name="detail" type="hidden" th:value="*{detail}"> 

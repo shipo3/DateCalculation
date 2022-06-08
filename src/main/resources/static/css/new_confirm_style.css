@@ -16,30 +16,30 @@ h2 {
   color: #a59aca;
 }
 
-.form-area {
+div {
   background-color: #a59aca;
   color: #fff;
   font-size: 150%;
   padding: 10px 0px;
 }
 
-p{
-   margin-top: 5px ;
-   margin-left:400px;
+table {
+  table-layout: auto;
+  border-collapse: collapse;
+  font-size: 120%;
+  margin-left: 150px;
 }
 
-.detail1{
-   margin-top: 0px ;
-   margin-left:400px;
-   float:  left;
+.td1 {
+  text-align: right;
+  padding: 10px 20px 0px 0px;
+  width: 20%;
 }
 
-.detail2 {
- margin-top: 5px ;
- margin-bottom: 15px ;
- margin-left:470px;
- width:50%;
- word-break: break-all;
+.td2 {
+  width: 70%;
+  padding: 10px 100px 0px 0px;
+  color: #17184b;
 }
 
 .back-btn {
@@ -51,7 +51,6 @@ p{
   display: inline-block;
   padding: 10px 10px;
   margin: 10px 10px 10px 1100px;
-
 }
 
 .register-btn {
@@ -63,8 +62,7 @@ p{
   display: inline-block;
   padding: 10px 10px;
   margin: 10px 10px 10px 1100px;
- 
-}
+ }
 
 h1 {
   margin-left: 30px;
