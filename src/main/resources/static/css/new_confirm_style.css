@@ -1,71 +1,70 @@
 header {
-  color: #745399;
-  height: 120px;
-}
-
-.back {
-    font-size: 150%;
-    float: left;
-    margin: 25px 0px 20px 30px;
-    text-decoration: none;
-    font-weight: bold;
+  color: #aacf53;
+  height: 90px;
 }
 
 h2 {
-   margin: 20px 0px 0px 1000px;
-    font-size: 180%;
-    font-weight: bold;
+  margin: 30px 20px 0px 1000px;
 }
 
-.form-area {
-  background-color: #745399;
+.back {
+  font-size: 150%;
+  float: left;
+  margin: 30px 50px 0px 30px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #a59aca;
+}
+
+div {
+  background-color: #a59aca;
   color: #fff;
   font-size: 150%;
   padding: 10px 0px;
 }
 
-p{
-   margin-top: 5px ;
-   margin-left:400px;
+table {
+  table-layout: auto;
+  border-collapse: collapse;
+  font-size: 120%;
+  margin-left: 150px;
 }
 
-.detail1{
-   margin-top: 0px ;
-   margin-left:400px;
-   float:  left;
+.td1 {
+  text-align: right;
+  padding: 10px 20px 0px 0px;
+  width: 20%;
 }
 
-.detail2 {
- margin-top: 5px ;
- margin-bottom: 15px ;
- margin-left:470px;
- width:50%;
- word-break: break-all;
+.td2 {
+  width: 70%;
+  padding: 10px 100px 0px 0px;
+  color: #17184b;
 }
 
 .back-btn {
   background-color: #fff;
-  color: #d7003a;
-  border: thin solid #d7003a;
+  color: #82ae46;
+  border: thin solid #82ae46;
   cursor: pointer;
-  font-size: 100%;
-  margin: 10px 10px 10px 1100px;
-  padding: 10px 10px;
+  font-size: 90%;
   display: inline-block;
+  padding: 10px 10px;
+  margin: 10px 10px 10px 1100px;
 }
 
 .register-btn {
-  background-color: #d7003a;
+  background-color: #82ae46;
   color: #fff;
   border: none;
   cursor: pointer;
-  font-size: 100%;
-  margin: 10px 10px 10px 1100px;
-  padding: 10px 10px;
+  font-size: 90%;
   display: inline-block;
-}
+  padding: 10px 10px;
+  margin: 10px 10px 10px 1100px;
+ }
 
 h1 {
   margin-left: 30px;
-  color: #745399;
+  color: #a59aca;
 }

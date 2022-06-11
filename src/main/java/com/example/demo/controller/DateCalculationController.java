@@ -1,6 +1,10 @@
 package com.example.demo.controller;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +35,6 @@ public class DateCalculationController {
     public String getFormulaData(Model model) {
 	// DBに入っている既存の計算式を表示させる
 	List<FormulaData> formulaDataList = dateCalculationService.getAll();
-	System.out.println(formulaDataList);
 	if (CollectionUtils.isEmpty(formulaDataList)) {
 	    String error = "登録されている計算式はありません。";
 	    model.addAttribute("complete", error);
@@ -41,56 +44,63 @@ public class DateCalculationController {
     }
 
     @PostMapping("/top")
-    public String postTop(@RequestParam("inputDate") String inputDate, Model model) {
+    public String calculationResult(@RequestParam("inputDate") String inputDate, Model model) {
 	// 入力日が空の場合はエラーを出す
 	if (inputDate.isEmpty()) {
 	    String error = "＊基準日を入力して下さい。";
 	    model.addAttribute("inputError", error);
-	    inputDate = "　";
+	    inputDate = "                    ";
 	    model.addAttribute("id", inputDate);
+	    // 計算式の取得表示
+	    List<FormulaData> formulaDataList = dateCalculationService.getAll();
+	    model.addAttribute("fdList", formulaDataList);
+
 	    return "calculation/top";
 	}
+	// 結果を入れるリストを作る
+	List<String> resultList = new ArrayList<String>();
+
 	// 入力日がある場合は計算処理を行い結果出力する
-	List<String> re = dateCalculationService.dateAdjust(inputDate);
-	model.addAttribute("resultList", re);
+	// LocalDateリストから取り出してyyyy/MM/ddのフォーマットにする
+	resultList = dateCalculationService.dateAdjust(inputDate).stream()
+		.map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).collect(Collectors.toList());
+
+	model.addAttribute("resultList", resultList);
+
+	// 入力された基準日の表示
 	String inputDate2 = inputDate.replace("-", "/");
 	model.addAttribute("id", inputDate2);
-
+	// 計算式の取得表示
 	List<FormulaData> formulaDataList = dateCalculationService.getAll();
-	System.out.println(formulaDataList);
 	model.addAttribute("fdList", formulaDataList);
 
 	return "calculation/top";
     }
 
-//「新規登録」押下後の画面取得  /　登録完了メッセージ取得
+    // 「新規登録」押下後の画面取得
     @GetMapping("/new")
-    public String form(FormulaData formulaData, Model model, @ModelAttribute("complete") String complete) {
+    public String form(FormulaData formulaData, Model model) {
 	model.addAttribute("formuladata", new FormulaData());
 	return "calculation/new";
     }
 
-//確認画面から戻った時
-    @PostMapping("/new")
-    public String formback(FormulaData formulaData, Model model) {
-	model.addAttribute("title", "calc_new");
-	return "calculation/new";
-    }
-
-//新規登録にて「次へ」押下時　バリデーションチェック行なう
-    @PostMapping("/new_confirm")
+    // 新規登録にて「次へ」押下時 バリデーションチェック行なう
+    @PostMapping("/new-confirm")
     public String confirm(@Validated FormulaData formulaData, BindingResult result, Model model) {
 	if (result.hasErrors()) {
-	    model.addAttribute("title", "calc_new");
 	    return "calculation/new";
 	}
 	// 入力エラーなければ確認画面へ進む
-	model.addAttribute("title", "calc_confirm");
-	return "calculation/new_confirm";
-
+	return "calculation/new-confirm";
     }
 
-//確認画面にて「登録する」押下時　エラーがなければDBに新規登録してnew画面に戻る
+    // パス指定で確認画面にアクセス時TOPに戻す
+    @GetMapping("/new-confirm")
+    public String backtop() {
+	return "redirect:/calculation/top";
+    }
+
+    // 確認画面にて「登録する」押下時 エラーがなければDBに新規登録してtop画面に戻る
     @PostMapping("/complete")
     public String create(@Validated FormulaData formulaData, BindingResult result, Model model,
 	    RedirectAttributes redirectAttributes) {
@@ -106,32 +116,45 @@ public class DateCalculationController {
 
     // top.htmlにて[更新]押下時にchange.htmlを表示
     @GetMapping("/change/id={id}")
-    public String change(@PathVariable("id") int id, Model model) {
-	FormulaData fd = dateCalculationService.getOne(id);
-	System.out.println(fd);
-	model.addAttribute("formulaData", fd);
-	return "calculation/change";
-    }
+    public String change(@PathVariable("id") int id, Model model, RedirectAttributes redirectAttributes) {
+	System.out.println(dateCalculationService.getOne(id));
 
-    // 確認画面から戻った時
-    @PostMapping("/change/id={id}")
-    public String changeback(FormulaData formulaData, Model model) {
+	Optional<FormulaData> fd = dateCalculationService.getOne(id);
+	if (fd.isEmpty()) {
+	    System.out.println("値がnullです");
+	    redirectAttributes.addFlashAttribute("complete", "存在しないIDです。");
+	    return "redirect:/calculation/top";
+	}
+	FormulaData fd2 = fd.get();
+	model.addAttribute("formulaData", fd2);
 	return "calculation/change";
     }
 
     // change.htmlにて[次へ]押下時 バリデーションチェック行なう
-    @PostMapping("/change_confirm")
+    @PostMapping("/change-confirm")
     public String changeConfirm(@Validated FormulaData formulaData, BindingResult result, Model model) {
 	if (result.hasErrors()) {
 	    return "calculation/change";
 	}
 	// 入力エラーなければ確認画面へ進む
-	return "calculation/change_confirm";
+	return "calculation/change-confirm";
     }
 
-//確認画面にて「更新する」押下時　エラーがなければDBに更新登録してchnge.htmlに戻る
-    @PostMapping("/change_complete")
-    public String upgate(@Validated FormulaData formulaData, BindingResult result, Model model,
+    // 確認画面から戻った時
+    @PostMapping("/change/id={id}")
+    public String changeBack(FormulaData formulaData, Model model) {
+	return "calculation/change";
+    }
+
+    // パス指定で確認画面にアクセス時TOPに戻す
+    @GetMapping("/change-confirm")
+    public String backTop() {
+	return "redirect:/calculation/top";
+    }
+
+    // 確認画面にて「更新する」押下時 エラーがなければDBに更新登録してchnge.htmlに戻る
+    @PostMapping("/change-complete")
+    public String update(@Validated FormulaData formulaData, BindingResult result, Model model,
 	    RedirectAttributes redirectAttributes) {
 
 	if (result.hasErrors()) {
@@ -145,8 +168,7 @@ public class DateCalculationController {
 	return "redirect:/calculation/top";
     }
 
-    // calculation.htmlにて[削除]押下
-
+    // calculation.htmlにて[削除]押下時、DBから削除する
     @PostMapping("delete/id={id}")
     public String delete(@PathVariable int id, @ModelAttribute FormulaData formulaData,
 	    RedirectAttributes redirectAttributes) {
@@ -154,5 +176,4 @@ public class DateCalculationController {
 	redirectAttributes.addFlashAttribute("complete", "削除完了しました。");
 	return "redirect:/calculation/top";
     }
-
 }
