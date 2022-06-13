@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import com.example.demo.repository.DateCalculationMapper;
@@ -21,16 +21,18 @@ class DateCalculationServiceTest {
 //	assertEquals(2, 1 + 3, "失敗です。");
 //	assertTrue(2 < 1, () -> "失敗メッセージ");
 //    }
+    // コンストラクタインジェクション＋Mockitoの書き方
+    @InjectMocks
     private DateCalculationService dateCalculationService;
 
-    // コンストラクタインジェクションの場合の書き方
     @Mock
     private DateCalculationMapper dateCalculationMapper;
 
-    @BeforeEach
-    public void setUp() {
-	dateCalculationService = new DateCalculationService(dateCalculationMapper);
-    }
+    // @InjectMocks使う場合は以下必要なし
+//    @BeforeEach
+//    public void setUp() {
+//	dateCalculationService = new DateCalculationService(dateCalculationMapper);
+//    }
 
     // 日付計算処理のテスト
     @ParameterizedTest
