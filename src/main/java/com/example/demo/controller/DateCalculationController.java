@@ -148,7 +148,7 @@ public class DateCalculationController {
 
     // パス指定で確認画面にアクセス時TOPに戻す
     @GetMapping("/change-confirm")
-    public String backTop() {
+    public String changeBackTop() {
 	return "redirect:/calculation/top";
     }
 
