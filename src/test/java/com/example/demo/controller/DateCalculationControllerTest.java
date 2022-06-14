@@ -4,44 +4,42 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.example.demo.domain.FormulaData;
+import com.example.demo.service.DateCalculationService;
 
 public class DateCalculationControllerTest {
+    // コンストラクタインジェクション＋Mockitoの書き方
+    @InjectMocks
+    private DateCalculationController dateCalculationController;
 
-//    // mockMvcを使う
-//    private MockMvc mockMvc;
-//    @InjectMocks
-//    private DateCalculationController dateCalculationController;
-//
-//    // コンストラクタインジェクションの場合の書き方
-//    @Mock
-//    private DateCalculationService dateCalculationService;
-//
-//    @BeforeEach
-//    public void setUp() {
-//	this.mockMvc = MockMvcBuilders.standaloneSetup(dateCalculationController).build();
+    @Mock
+    private DateCalculationService dateCalculationService;
+    // HTTPリクエストを投げるためにMockMvc使う
+    private MockMvc mockMvc;
+
+    @BeforeEach
+    public void setUp() {
+	this.mockMvc = MockMvcBuilders.standaloneSetup(dateCalculationController).build();
+    }
+
+    @Test
+    @DisplayName("計算式リストが空の場合エラーメッセージが表示されること")
+    void testGetFormulaData() throws Exception {
+	mockMvc.perform(post("top")).andExpect(model().hasErrors()).andExpect(view().name("calculation/top"));
+//		.andExpect(model().attribute("complete", error))
+    }
+
+//    @Test
+//    void testCalculationResult() {
+//	fail("まだ実装されていません");
 //    }
-
-    private class DateCalculationServiceMock {
-	FormulaData fd;
-
-	public void insertOne(FormulaData fd) throws Exception {
-	    this.fd = fd;
-	}
-    }
-
-    @Test
-    void testGetFormulaData() {
-	fail("まだ実装されていません");
-    }
-
-    @Test
-    void testCalculationResult() {
-	fail("まだ実装されていません");
-    }
 
     @Test
     @DisplayName("新規登録画面に遷移すること")
@@ -80,12 +78,15 @@ public class DateCalculationControllerTest {
 
     @Test
     void testChangeConfirm() {
-	fail("まだ実装されていません");
+	mockMvc.perform(post("top")).andExpect(model().hasErrors()).andExpect(view().name("calculation/top"));
+//	.andExpect(model().attribute("complete", error))
     }
 
     @Test
-    void testChangeBack() {
-	fail("まだ実装されていません");
+    @DisplayName("確認画面からchange画面に戻ること")
+    void testChangeBack() throws Exception {
+	mockMvc.perform(post("/change/id={id}")).andExpect(status().isOk())
+		.andExpect(view().name("calculation/change"));
     }
 
     @Test

@@ -7,4 +7,3 @@
  month int NOT NULL,
  day int NOT NULL
  );
- 

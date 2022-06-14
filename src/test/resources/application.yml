@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active:
+      - ut
+    group:
+      ut:
+        - database-h2
+        - common2

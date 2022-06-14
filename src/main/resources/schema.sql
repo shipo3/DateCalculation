@@ -1,4 +1,4 @@
- CREATE TABLE date_calculation.formula
+ CREATE TABLE IF NOT EXISTS formula
  (
  id int PRIMARY KEY AUTO_INCREMENT,
  name varchar(30) NOT NULL,
