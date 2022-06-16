@@ -77,7 +77,7 @@ public class DateCalculationControllerTest {
     }
 
     @Test
-    void testChangeConfirm() {
+    void testChangeConfirm() throws Exception {
 	mockMvc.perform(post("top")).andExpect(model().hasErrors()).andExpect(view().name("calculation/top"));
 //	.andExpect(model().attribute("complete", error))
     }

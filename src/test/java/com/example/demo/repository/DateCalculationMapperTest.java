@@ -13,15 +13,21 @@ import org.springframework.test.context.TestPropertySource;
 import com.example.demo.domain.FormulaData;
 
 @MybatisTest
-@TestPropertySource(locations = "classpath:application-database-h2.yml")
+@TestPropertySource(locations = "classpath:application.properties")
 public class DateCalculationMapperTest {
 
     @Autowired
     private DateCalculationMapper mapperTest;
 
     @Test
+    public void 検索_全件して結果をリストで取得出来る事() throws Exception {
+	List<FormulaData> actual = mapperTest.findAll();
+	assertEquals(3, actual.size());
+    }
+
+    @Test
     public void 新規登録が出来る事() throws Exception {
-	FormulaData formula = createFormula(14, "年のみ", "最大値", 100, 0, 0);
+	FormulaData formula = createFormula(4, "年のみ", "最大値", 100, 0, 0);
 
 	mapperTest.insertOne(formula);
 	Optional<FormulaData> actual = mapperTest.findOne(4);
@@ -31,14 +37,8 @@ public class DateCalculationMapperTest {
     }
 
     @Test
-    public void 検索_全件して結果をリストで取得出来る事() throws Exception {
-	List<FormulaData> actual = mapperTest.findAll();
-	assertEquals(3, actual.size());
-    }
-
-    @Test
     public void キーに紐づく1件の更新が出来る事() throws Exception {
-	mapperTest.updateOne(14, "年と月", "最小値", -100, -100, 0);
+	mapperTest.updateOne(4, "年と月", "最小値", -100, -100, 0);
 	Optional<FormulaData> actual = mapperTest.findOne(4);
 	FormulaData fd = actual.get();
 
@@ -52,7 +52,7 @@ public class DateCalculationMapperTest {
 
     @Test
     public void キーに紐づく1件の削除が出来る事() throws Exception {
-	FormulaData formula = createFormula(14, "年のみ", "最大値", 100, 0, 0);
+	FormulaData formula = createFormula(4, "年と月", "最小値", -100, -100, 0);
 	mapperTest.deleteOne(formula);
 	List<FormulaData> actual = mapperTest.findAll();
 
