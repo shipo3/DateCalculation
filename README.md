@@ -25,7 +25,7 @@
 
 ## 使用技術
 * Java 11
-* Spring 2.6.7
+* Spring 2.7.0
 * MySQL 8.0.28
 * Thymeleaf
 * MyBtatis 2.2.2
