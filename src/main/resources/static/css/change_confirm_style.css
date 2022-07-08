@@ -1,0 +1,70 @@
+header {
+  color: #eb6101;
+  height: 90px;
+}
+
+h2 {
+  margin: 30px 20px 0px 1000px;
+}
+
+.back {
+  font-size: 150%;
+  float: left;
+  margin: 30px 50px 0px 30px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #a59aca;
+}
+
+div {
+  background-color: #a59aca;
+  color: #fff;
+  font-size: 150%;
+  padding: 10px 0px;
+}
+
+table {
+  table-layout: auto;
+  border-collapse: collapse;
+  font-size: 120%;
+  margin-left: 150px;
+}
+
+.td1 {
+  text-align: right;
+  padding: 10px 20px 0px 0px;
+  width: 20%;
+}
+
+.td2 {
+  width: 70%;
+  padding: 10px 100px 0px 0px;
+  color: #17184b;
+}
+
+.back-btn {
+  background-color: #fff;
+  color: #eb6101;
+  border: thin solid #eb6101;
+  cursor: pointer;
+  font-size: 90%;
+  margin: 10px 10px 10px 1100px;
+  padding: 10px 10px;
+  display: inline-block;
+}
+
+.register-btn {
+  background-color: #eb6101;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 90%;
+  margin: 10px 10px 10px 1100px;
+  padding: 10px 10px;
+  display: inline-block;
+}
+
+h1 {
+  margin-left: 30px;
+  color: #a59aca;
+}
