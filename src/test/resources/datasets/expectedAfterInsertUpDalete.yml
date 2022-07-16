@@ -1,0 +1,10 @@
+formula:
+    - id: 7
+      name: "年を超える日"
+      detail: "プラス"
+      year: 1
+      month: 0
+      day: -366
+  
+  
+  

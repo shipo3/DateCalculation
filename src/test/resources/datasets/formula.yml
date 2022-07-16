@@ -14,18 +14,18 @@ formula:
       day: -1000
 
     - id: 3
-      name: "年を超える日"
+      name: "年を超える月"
       detail: "プラス"
-      year: 1
-      month: -13
+      year: -1
+      month: 13
       day: 0
 
     - id: 4
       name: "月を超える日"
       detail: "マイナス"
       year: 0
-      month: -1
-      day: 31	  
+      month: 1
+      day: -31	  
 
     - id: 5
       name: "閏年"
