@@ -1,0 +1,43 @@
+formula:
+    - id: 1
+      name: "年のみ"
+      detail: "最大値"
+      year: 100
+      month: 0
+      day: 0
+
+    - id: 2
+      name: "月と日"
+      detail: "最小値"
+      year: 0
+      month: -100
+      day: -1000
+
+    - id: 3
+      name: "年を超える月"
+      detail: "プラス"
+      year: -1
+      month: 13
+      day: 0
+
+    - id: 4
+      name: "月を超える日"
+      detail: "マイナス"
+      year: 0
+      month: 1
+      day: -31    
+
+    - id: 5
+      name: "閏年"
+      detail: "基準日が閏年"
+      year: 0
+      month: 0
+      day: 1    
+
+    - id: 6
+      name: "閏年"
+      detail: "計算結果が閏年"
+      year: 2
+      month: 0
+      day: 1  
+          
