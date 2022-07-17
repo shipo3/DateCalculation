@@ -105,7 +105,8 @@ public class DateCalculationMapperTest {
     @DataSet(value = "formula.yml")
     public void 存在しないIDに紐づく一件を検索するとOptinalEmptyが返ること() {
 	Optional<FormulaData> actual = datecalculationmapper.findOne(8);
-	assertThat(actual).isEqualTo(Optional.empty());
+//	assertThat(actual).isEqualTo(Optional.empty());
+	assertThat(actual).isEmpty();
     }
 
     // 存在しないIDにて、取得に失敗した場合
