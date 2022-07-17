@@ -76,6 +76,15 @@ public class DateCalculationMapperTest {
 	assertEquals(31, fd.getDay());
     }
 
+    // hasValueメソッドを使う形
+    @Test
+    @DataSet(value = "formula.yml")
+    public void キーに紐づく1件の更新が出来ること_hasValue() throws Exception {
+	datecalculationmapper.updateOne(4, "月を超える日", "マイナス", 0, 1, -31);
+	Optional<FormulaData> actual = datecalculationmapper.findOne(4);
+	assertThat(actual).hasValue(new FormulaData(4, "月を超える日", "マイナス", 0, 1, -31));
+    }
+
     // Optionalのメソッドを使う形
     @Test
     @DataSet(value = "formula.yml")
