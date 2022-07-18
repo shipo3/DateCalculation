@@ -12,13 +12,13 @@ import com.example.demo.domain.FormulaData;
 public interface DateCalculationMapper {
     List<FormulaData> findAll();
 
-    public Optional<FormulaData> findOne(int id);
+    Optional<FormulaData> findOne(int id);
 
-    public void insertOne(FormulaData fd);
+    void insertOne(FormulaData fd);
 
-    public void updateOne(@Param("id") int id, @Param("name") String name, @Param("detail") String detail,
+    void updateOne(@Param("id") int id, @Param("name") String name, @Param("detail") String detail,
 	    @Param("year") int year, @Param("month") int month, @Param("day") int day);
 
-    public void deleteOne(FormulaData fd);
+    void deleteOne(FormulaData fd);
 
 }
