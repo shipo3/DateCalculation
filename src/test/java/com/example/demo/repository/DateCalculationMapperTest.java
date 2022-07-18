@@ -126,13 +126,4 @@ public class DateCalculationMapperTest {
 	assertThat(actual).isEmpty();
     }
 
-    // 存在しないIDにて、取得に失敗した場合
-    // Optionalのメソッドを使わない形
-    @Test
-    @DataSet(value = "formula.yml")
-    public void 存在しないIDに紐づく一件を検索するとExceptionが発生すること() throws Exception {
-	Optional<FormulaData> actual = datecalculationmapper.findOne(8);
-	assertThatThrownBy(() -> actual.get()).isInstanceOf(RuntimeException.class);
-    }
-
 }
