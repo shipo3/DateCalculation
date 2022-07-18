@@ -34,6 +34,14 @@ public class DateCalculationMapperTest {
     }
 
     @Test
+    @DataSet(value = "empty.yml")
+    public void 全件取得時レコードが０件だった場合NULLとなること() throws Exception {
+	List<FormulaData> actual = datecalculationmapper.findAll();
+	assertThat(actual).isEmpty();
+//	assertEquals(actual.isEmpty(), true);
+    }
+
+    @Test
     @DataSet(value = "formula.yml")
     public void 新規登録ができること() throws Exception {
 	FormulaData fd = new FormulaData(7, "年を超える日", "プラス", 1, 0, -366);
@@ -76,7 +84,7 @@ public class DateCalculationMapperTest {
 	assertEquals(31, fd.getDay());
     }
 
-    // hasValueメソッドを使う形
+    // hasValueにて検証する形
     @Test
     @DataSet(value = "formula.yml")
     public void キーに紐づく1件の更新が出来ること_hasValue() throws Exception {
