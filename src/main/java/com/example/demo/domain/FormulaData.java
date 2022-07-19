@@ -3,9 +3,11 @@ package com.example.demo.domain;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 //新規登録、更新時の入力チェック
 public class FormulaData {
     private int id;

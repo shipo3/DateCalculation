@@ -1,0 +1,10 @@
+cacheConnection: false
+cacheTableNames: false
+properties:
+  schema: formula
+caseInsensitiveStrategy: LOWERCASE
+connectionConfig:
+  url: "jdbc:mysql://localhost:3306/date_calculation"
+  user: "kuma"
+  password: "2203"
+  
