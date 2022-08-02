@@ -3,9 +3,12 @@ package com.example.demo.service;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,10 +22,11 @@ import com.example.demo.repository.DateCalculationMapper;
 @ExtendWith(MockitoExtension.class)
 class DateCalculationServiceTest {
 
-    // コンストラクタインジェクション＋Mockitoの書き方
+    // @Mockでモックにしたインスタンスの注入先となるインスタンス
     @InjectMocks
     private DateCalculationService dateCalculationService;
 
+    // モック（スタブ）に置き換えたいインスタンス
     @Mock
     private DateCalculationMapper dateCalculationMapper;
 
@@ -99,7 +103,7 @@ class DateCalculationServiceTest {
 
     // 存在しないIDにて、取得に失敗した場合
     @Test
-    public void 存在しないIDに紐づく一件を検索するとOptionalEmptyが返ること() {
+    void 存在しないIDに紐づく一件を検索するとOptionalEmptyが返ること() {
 	int id = 4;
 	doReturn(Optional.empty()).when(dateCalculationMapper).findOne(id);
 	Optional<FormulaData> actual = dateCalculationService.getOne(id);
@@ -109,10 +113,33 @@ class DateCalculationServiceTest {
     }
 
     // 日付計算処理のテスト
-//    @ParameterizedTest
-//    @ValueSource(strings = { "2022/05/01", "2024/02/29", "2022/02/28" })
-//    void testDateAdjust(String inputDate) {
-//	List<String> expected = Arrays.asList("2022/05/01", "2024/03/01", "2024/02/29");
-//	assertIterableEquals(expected, dateCalculationService.dateAdjust(inputDate));
-//    }
+    @Test
+    public void 計算基準日にNULLを渡すとNullPointerExceptionとなる事() throws Exception {
+	assertThatThrownBy(() -> {
+	    dateCalculationService.dateAdjust(null);
+	}).isInstanceOf(NullPointerException.class);
+    }
+
+    // 日付計算処理のテスト
+    @Test
+    void 日付加減処理が正しく行なわれるかを検証する() {
+	String inputDate = "2022-05-01";
+	List<FormulaData> formulaDatas = Arrays.asList(new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
+		new FormulaData(2, "月と日", "最小値", 0, -100, -1000));
+	doReturn(formulaDatas).when(dateCalculationMapper).findAll();
+
+	List<String> excected = new ArrayList<String>() {
+	    {
+		add("2122/05/01");
+		add("2011/04/07");
+	    }
+	};
+
+	List<String> actual = new ArrayList<String>();
+	actual = dateCalculationService.dateAdjust(inputDate).stream()
+		.map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).collect(Collectors.toList());
+	assertThat(actual).isEqualTo(excected);
+
+	verify(dateCalculationMapper).findAll();
+    }
 }
