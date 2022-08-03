@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,8 +43,9 @@ class DateCalculationServiceTest {
     }
 
     @Test
-    void 全件取得時レコードが０件だった場合NULLとなること() {
-	List<FormulaData> fd = Arrays.asList();
+    void 全件取得時レコードが０件だった場合空のリストとなること() {
+	List<FormulaData> fd = Collections.emptyList();
+//	List<FormulaData> fd = List.of();
 	doReturn(fd).when(dateCalculationMapper).findAll();
 	List<FormulaData> actual = dateCalculationService.getAll();
 	assertThat(actual).isEmpty();
