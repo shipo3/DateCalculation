@@ -45,7 +45,6 @@ class DateCalculationServiceTest {
     @Test
     void 全件取得時レコードが０件だった場合空のリストとなること() {
 	List<FormulaData> fd = Collections.emptyList();
-//	List<FormulaData> fd = List.of();
 	doReturn(fd).when(dateCalculationMapper).findAll();
 	List<FormulaData> actual = dateCalculationService.getAll();
 	assertThat(actual).isEmpty();
