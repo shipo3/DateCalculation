@@ -56,37 +56,22 @@ class DateCalculationServiceTest {
     @Test
     void データーを新規登録できること() {
 	FormulaData newFd = new FormulaData(3, "年を超える月", "プラス", -1, 13, 0);
-	doReturn(List.of(newFd)).when(dateCalculationMapper).findAll();
 	dateCalculationService.insertOne(newFd);
-	List<FormulaData> actual = dateCalculationService.getAll();
-	assertThat(actual).hasSize(1);
 
 	verify(dateCalculationMapper).insertOne(newFd);
     }
 
     @Test
     void 指定したデーターを1件削除できること() {
-	List<FormulaData> fd = Arrays.asList(new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
-		new FormulaData(2, "月と日", "最小値", 0, -100, -1000));
-	doReturn(fd).when(dateCalculationMapper).findAll();
 	FormulaData del = new FormulaData(3, "年を超える月", "プラス", -1, 13, 0);
 	dateCalculationService.deleteOne(del);
-	List<FormulaData> actual = dateCalculationService.getAll();
-	assertThat(actual).hasSize(2).contains(new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
-		new FormulaData(2, "月と日", "最小値", 0, -100, -1000));
 
 	verify(dateCalculationMapper).deleteOne(del);
     }
 
-    // hasValueにて検証する形
     @Test
-    void 指定したIDのデーターを更新できること_hasValue() throws Exception {
-	FormulaData fd = new FormulaData(1, "年のみ", "最小値", -100, 0, 0);
-	int id = 1;
-	doReturn(Optional.of(fd)).when(dateCalculationMapper).findOne(id);
+    void 指定したIDのデーターを更新できること() {
 	dateCalculationService.updateOne(1, "年のみ", "最小値", -100, 0, 0);
-	Optional<FormulaData> actual = dateCalculationService.getOne(id);
-	assertThat(actual).hasValue(new FormulaData(1, "年のみ", "最小値", -100, 0, 0));
 
 	verify(dateCalculationMapper).updateOne(1, "年のみ", "最小値", -100, 0, 0);
     }
