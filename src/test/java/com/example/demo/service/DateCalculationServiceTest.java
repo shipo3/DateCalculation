@@ -33,8 +33,10 @@ class DateCalculationServiceTest {
 
     @Test
     void Mapperから取得したデーターをそのまま返すこと() {
-	List<FormulaData> fd = Arrays.asList(new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
-		new FormulaData(2, "月と日", "最小値", 0, -100, -1000), new FormulaData(3, "年を超える月", "プラス", -1, 13, 0));
+	List<FormulaData> fd = Arrays.asList(
+		    new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
+		    new FormulaData(2, "月と日", "最小値", 0, -100, -1000),
+		    new FormulaData(3, "年を超える月", "プラス", -1, 13, 0));
 	doReturn(fd).when(dateCalculationMapper).findAll();
 	List<FormulaData> actual = dateCalculationService.getAll();
 	assertThat(actual).hasSize(3).isEqualTo(fd);
@@ -110,8 +112,9 @@ class DateCalculationServiceTest {
     @Test
     void 日付加減処理が正しく行なわれるかを検証する() {
 	String inputDate = "2022-05-01";
-	List<FormulaData> formulaDatas = Arrays.asList(new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
-		new FormulaData(2, "月と日", "最小値", 0, -100, -1000));
+	List<FormulaData> formulaDatas = Arrays.asList(
+		    new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
+		    new FormulaData(2, "月と日", "最小値", 0, -100, -1000));
 	doReturn(formulaDatas).when(dateCalculationMapper).findAll();
 
 	List<String> excected = new ArrayList<String>() {
@@ -123,7 +126,8 @@ class DateCalculationServiceTest {
 
 	List<String> actual = new ArrayList<String>();
 	actual = dateCalculationService.dateAdjust(inputDate).stream()
-		.map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))).collect(Collectors.toList());
+		    .map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
+		    .collect(Collectors.toList());
 	assertThat(actual).isEqualTo(excected);
 
 	verify(dateCalculationMapper).findAll();
