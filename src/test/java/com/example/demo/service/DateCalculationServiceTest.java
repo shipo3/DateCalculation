@@ -95,7 +95,7 @@ class DateCalculationServiceTest {
 	int id = 4;
 	doReturn(Optional.empty()).when(dateCalculationMapper).findOne(id);
 	Optional<FormulaData> actual = dateCalculationService.getOne(id);
-	assertThat(actual).isEqualTo(Optional.empty());
+	assertThat(actual).isEmpty();
 
 	verify(dateCalculationMapper).findOne(id);
     }
