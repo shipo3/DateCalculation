@@ -117,7 +117,7 @@ class DateCalculationServiceTest {
 		    new FormulaData(2, "月と日", "最小値", 0, -100, -1000));
 	doReturn(formulaDatas).when(dateCalculationMapper).findAll();
 
-	List<String> excected = new ArrayList<String>() {
+	List<String> expected = new ArrayList<String>() {
 	    {
 		add("2122/05/01");
 		add("2011/04/07");
@@ -128,7 +128,7 @@ class DateCalculationServiceTest {
 	actual = dateCalculationService.dateAdjust(inputDate).stream()
 		    .map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
 		    .collect(Collectors.toList());
-	assertThat(actual).isEqualTo(excected);
+	assertThat(actual).isEqualTo(expected);
 
 	verify(dateCalculationMapper).findAll();
     }
