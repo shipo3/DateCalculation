@@ -3,13 +3,12 @@ package com.example.demo.service;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -117,17 +116,17 @@ class DateCalculationServiceTest {
 		    new FormulaData(2, "月と日", "最小値", 0, -100, -1000));
 	doReturn(formulaDatas).when(dateCalculationMapper).findAll();
 
-	List<String> expected = new ArrayList<String>() {
+	LocalDate date1 = LocalDate.of(2122, 05, 01);
+	LocalDate date2 = LocalDate.of(2011, 04, 07);
+	List<LocalDate> expected = new ArrayList<LocalDate>() {
 	    {
-		add("2122/05/01");
-		add("2011/04/07");
+		add(date1);
+		add(date2);
 	    }
 	};
 
-	List<String> actual = new ArrayList<String>();
-	actual = dateCalculationService.dateAdjust(inputDate).stream()
-		    .map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
-		    .collect(Collectors.toList());
+	List<LocalDate> actual = new ArrayList<LocalDate>();
+	actual = dateCalculationService.dateAdjust(inputDate);
 	assertThat(actual).isEqualTo(expected);
 
 	verify(dateCalculationMapper).findAll();
