@@ -101,14 +101,6 @@ class DateCalculationServiceTest {
 
     // 日付計算処理のテスト
     @Test
-    public void 計算基準日にNULLを渡すとNullPointerExceptionとなる事() throws Exception {
-	assertThatThrownBy(() -> {
-	    dateCalculationService.dateAdjust(null);
-	}).isInstanceOf(NullPointerException.class);
-    }
-
-    // 日付計算処理のテスト
-    @Test
     void 日付加減処理が正しく行なわれるかを検証する() {
 	String inputDate = "2022-05-01";
 	List<FormulaData> formulaDatas = Arrays.asList(
