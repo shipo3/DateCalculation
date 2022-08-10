@@ -45,7 +45,12 @@ public class DateCalculationService {
 	dateCalculationMapper.deleteOne(fd);
     }
 
-    // 日付の加減計算処理
+    /**
+     * Adds or subtracts dates based on formulas registered in the database to or
+     * from the retrieved date
+     *
+     * @param inputDate the date to be calculated, not {@code null}
+     */
     public List<LocalDate> dateAdjust(String inputDate) {
 	// inputにて取得した日付をLocalDate型にする
 	LocalDate ld = LocalDate.parse(inputDate);
@@ -57,8 +62,8 @@ public class DateCalculationService {
 	// 取得したデータから取り出して日付をプラスする
 	// Collection の中身を利用して、何かの値を作成し、リストに変換
 	resultList = formulaDatas.stream()
-		.map(fd -> ld.plusYears(fd.getYear()).plusMonths(fd.getMonth()).plusDays(fd.getDay()))
-		.collect(Collectors.toList());
+		    .map(fd -> ld.plusYears(fd.getYear()).plusMonths(fd.getMonth()).plusDays(fd.getDay()))
+		    .collect(Collectors.toList());
 
 	return resultList;
     }
