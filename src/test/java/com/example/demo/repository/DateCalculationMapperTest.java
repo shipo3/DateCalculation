@@ -27,10 +27,13 @@ public class DateCalculationMapperTest {
     @DataSet(value = "formula.yml")
     public void データー全件取得できること() throws Exception {
 	List<FormulaData> actual = datecalculationmapper.findAll();
-	assertThat(actual).hasSize(6).contains(new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
-		new FormulaData(2, "月と日", "最小値", 0, -100, -1000), new FormulaData(3, "年を超える月", "プラス", -1, 13, 0),
-		new FormulaData(4, "月を超える日", "マイナス", 0, 1, -31), new FormulaData(5, "閏年", "基準日が閏年", 0, 0, 1),
-		new FormulaData(6, "閏年", "計算結果が閏年", 2, 0, 1));
+	assertThat(actual).hasSize(6).contains(
+		    new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
+		    new FormulaData(2, "月と日", "最小値", 0, -100, -1000),
+		    new FormulaData(3, "年を超える月", "プラス", -1, 13, 0),
+		    new FormulaData(4, "月を超える日", "マイナス", 0, 1, -31),
+		    new FormulaData(5, "閏年", "基準日が閏年", 0, 0, 1),
+		    new FormulaData(6, "閏年", "計算結果が閏年", 2, 0, 1));
     }
 
     @Test
