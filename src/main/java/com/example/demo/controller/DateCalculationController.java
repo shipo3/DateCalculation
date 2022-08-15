@@ -82,8 +82,7 @@ public class DateCalculationController {
     // 「新規登録」押下後の画面取得
     @GetMapping("/new")
     public String form(@ModelAttribute FormulaData formulaData, Model model) {
-	formulaData = new FormulaData(1, "年のみ", "最大値", 100, 0, 0);
-	model.addAttribute("formuladata", formulaData);
+	model.addAttribute("formuladata", new FormulaData());
 	return "calculation/new";
     }
 
