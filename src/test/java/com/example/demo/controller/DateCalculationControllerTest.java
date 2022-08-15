@@ -4,6 +4,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -23,6 +25,7 @@ import com.example.demo.domain.FormulaData;
 import com.example.demo.service.DateCalculationService;
 
 @ExtendWith(MockitoExtension.class)
+@AutoConfigureMockMvc
 public class DateCalculationControllerTest {
     // @Mockでモックにしたインスタンスの注入先となるインスタンス
     @InjectMocks
@@ -65,6 +68,7 @@ public class DateCalculationControllerTest {
 			    .getAll();
 	mockMvc.perform(post("/calculation/top").param("inputDate", ""))
 			    .andExpect(model().attribute("inputError", "＊基準日を入力して下さい。"))
+			    .andExpect(model().attribute("id", "                    "))
 			    .andExpect(model().attribute("fdList", fd))
 			    .andExpect(view().name("calculation/top"));
 
@@ -73,14 +77,22 @@ public class DateCalculationControllerTest {
 
     @Test
     void 入力日が空でない場合は計算結果が表示されたtopページが返ること() throws Exception {
-	List<String> resultList = new ArrayList<String>(Arrays.asList("2122/ 05/ 01", "2011/04/07"));
+	LocalDate date1 = LocalDate.of(2122, 05, 01);
+	LocalDate date2 = LocalDate.of(2011, 04, 07);
+	List<LocalDate> resultList = new ArrayList<LocalDate>() {
+	    {
+		add(date1);
+		add(date2);
+	    }
+	};
 	doReturn(resultList).when(dateCalculationService)
-			    .dateAdjust("2022-05-01")
-			    .stream()
+			    .dateAdjust("2022-05-01");
+	List<String> resultListStr = resultList.stream()
 			    .map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
 			    .collect(Collectors.toList());
 	mockMvc.perform(post("/calculation/top").param("inputDate", "2022-05-01"))
-			    .andExpect(model().attribute("resultList", resultList))
+			    .andExpect(model().attribute("resultList", resultListStr))
+			    .andExpect(model().attribute("id", "2022/05/01"))
 			    .andExpect(view().name("calculation/top"));
 
 	verify(dateCalculationService).dateAdjust("2022-05-01");
