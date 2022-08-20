@@ -80,7 +80,7 @@ public class DateCalculationControllerTest {
 	LocalDate date2 = LocalDate.of(2011, 04, 07);
 	List<LocalDate> resultList = List.of(date1, date2);
 	doReturn(resultList).when(dateCalculationService)
-			.dateAdjust("2022-05-01");
+			.calculate(LocalDate.parse("2022-05-01"));
 	List<String> resultListStr = resultList.stream()
 			.map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
 			.collect(Collectors.toList());
@@ -89,7 +89,7 @@ public class DateCalculationControllerTest {
 			.andExpect(model().attribute("id", "2022/05/01"))
 			.andExpect(view().name("calculation/top"));
 
-	verify(dateCalculationService).dateAdjust("2022-05-01");
+	verify(dateCalculationService).calculate(LocalDate.parse("2022-05-01"));
     }
 
 }
