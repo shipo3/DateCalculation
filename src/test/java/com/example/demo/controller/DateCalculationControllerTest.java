@@ -38,21 +38,21 @@ public class DateCalculationControllerTest {
     @BeforeEach
     public void setUp() {
 	this.mockMvc = MockMvcBuilders.standaloneSetup(dateCalculationController)
-			    .build();
+			.build();
     }
 
     @Test
     void topページをGETすると結果が200となり計算式が表示されたtopページが返ること() throws Exception {
 	List<FormulaData> fd = Arrays.asList(
-			    new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
-			    new FormulaData(2, "月と日", "最小値", 0, -100, -1000),
-			    new FormulaData(3, "年を超える月", "プラス", -1, 13, 0));
+			new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
+			new FormulaData(2, "月と日", "最小値", 0, -100, -1000),
+			new FormulaData(3, "年を超える月", "プラス", -1, 13, 0));
 	doReturn(fd).when(dateCalculationService)
-			    .getAll();
+			.getAll();
 	mockMvc.perform(get("/calculation/top"))
-			    .andExpect(status().isOk())
-			    .andExpect(model().attribute("fdList", fd))
-			    .andExpect(view().name("calculation/top"));
+			.andExpect(status().isOk())
+			.andExpect(model().attribute("fdList", fd))
+			.andExpect(view().name("calculation/top"));
 
 	verify(dateCalculationService).getAll();
     }
@@ -60,16 +60,16 @@ public class DateCalculationControllerTest {
     @Test
     void 入力日が空の場合はエラーが表示されたtopページが返ること() throws Exception {
 	List<FormulaData> fd = Arrays.asList(
-			    new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
-			    new FormulaData(2, "月と日", "最小値", 0, -100, -1000),
-			    new FormulaData(3, "年を超える月", "プラス", -1, 13, 0));
+			new FormulaData(1, "年のみ", "最大値", 100, 0, 0),
+			new FormulaData(2, "月と日", "最小値", 0, -100, -1000),
+			new FormulaData(3, "年を超える月", "プラス", -1, 13, 0));
 	doReturn(fd).when(dateCalculationService)
-			    .getAll();
+			.getAll();
 	mockMvc.perform(post("/calculation/top").param("inputDate", ""))
-			    .andExpect(model().attribute("inputError", "＊基準日を入力して下さい。"))
-			    .andExpect(model().attribute("id", "                    "))
-			    .andExpect(model().attribute("fdList", fd))
-			    .andExpect(view().name("calculation/top"));
+			.andExpect(model().attribute("inputError", "＊基準日を入力して下さい。"))
+			.andExpect(model().attribute("id", "                    "))
+			.andExpect(model().attribute("fdList", fd))
+			.andExpect(view().name("calculation/top"));
 
 	verify(dateCalculationService).getAll();
     }
@@ -80,14 +80,14 @@ public class DateCalculationControllerTest {
 	LocalDate date2 = LocalDate.of(2011, 04, 07);
 	List<LocalDate> resultList = List.of(date1, date2);
 	doReturn(resultList).when(dateCalculationService)
-			    .dateAdjust("2022-05-01");
+			.dateAdjust("2022-05-01");
 	List<String> resultListStr = resultList.stream()
-			    .map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
-			    .collect(Collectors.toList());
+			.map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
+			.collect(Collectors.toList());
 	mockMvc.perform(post("/calculation/top").param("inputDate", "2022-05-01"))
-			    .andExpect(model().attribute("resultList", resultListStr))
-			    .andExpect(model().attribute("id", "2022/05/01"))
-			    .andExpect(view().name("calculation/top"));
+			.andExpect(model().attribute("resultList", resultListStr))
+			.andExpect(model().attribute("id", "2022/05/01"))
+			.andExpect(view().name("calculation/top"));
 
 	verify(dateCalculationService).dateAdjust("2022-05-01");
     }
