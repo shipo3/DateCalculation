@@ -5,9 +5,11 @@ import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 //新規登録、更新時の入力チェック
 public class FormulaData {
     private int id;
