@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,7 +78,7 @@ public class DateCalculationControllerTest {
     void 入力日が空でない場合は計算結果が表示されたtopページが返ること() throws Exception {
 	LocalDate date1 = LocalDate.of(2122, 05, 01);
 	LocalDate date2 = LocalDate.of(2011, 04, 07);
-	List<LocalDate> resultList = new ArrayList<LocalDate>(List.of(date1, date2));
+	List<LocalDate> resultList = List.of(date1, date2);
 	doReturn(resultList).when(dateCalculationService)
 			    .dateAdjust("2022-05-01");
 	List<String> resultListStr = resultList.stream()
