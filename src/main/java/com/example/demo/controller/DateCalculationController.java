@@ -66,7 +66,7 @@ public class DateCalculationController {
 
 	// 入力日がある場合は計算処理を行い結果出力する
 	// LocalDateリストから取り出してyyyy/MM/ddのフォーマットにする
-	resultList = dateCalculationService.dateAdjust(iD)
+	resultList = dateCalculationService.calculate(iD)
 			.stream()
 			.map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
 			.collect(Collectors.toList());

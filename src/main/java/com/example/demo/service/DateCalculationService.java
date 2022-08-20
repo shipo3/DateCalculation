@@ -51,7 +51,7 @@ public class DateCalculationService {
      *
      * @param inputDate the date to be calculated, not {@code null}
      */
-    public List<LocalDate> dateAdjust(LocalDate iD) {
+    public List<LocalDate> calculate(LocalDate iD) {
 	// 結果を入れるリストを作る
 	List<LocalDate> resultList = new ArrayList<LocalDate>();
 
