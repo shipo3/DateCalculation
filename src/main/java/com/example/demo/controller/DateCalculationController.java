@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -59,14 +58,9 @@ public class DateCalculationController {
 	    return "calculation/top";
 	}
 	// inputにて取得した日付をLocalDate型にする
-	LocalDate iD = LocalDate.parse(inputDate);
-
-	// 結果を入れるリストを作る
-	List<String> resultList = new ArrayList<String>();
-
 	// 入力日がある場合は計算処理を行い結果出力する
 	// LocalDateリストから取り出してyyyy/MM/ddのフォーマットにする
-	resultList = dateCalculationService.calculate(iD)
+	List<String> resultList = dateCalculationService.calculate(LocalDate.parse(inputDate))
 			.stream()
 			.map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
 			.collect(Collectors.toList());
