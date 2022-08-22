@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,15 +57,13 @@ public class DateCalculationController {
 
 	    return "calculation/top";
 	}
-	// 結果を入れるリストを作る
-	List<String> resultList = new ArrayList<String>();
-
+	// inputにて取得した日付をLocalDate型にする
 	// 入力日がある場合は計算処理を行い結果出力する
 	// LocalDateリストから取り出してyyyy/MM/ddのフォーマットにする
-	resultList = dateCalculationService.dateAdjust(inputDate)
-			    .stream()
-			    .map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
-			    .collect(Collectors.toList());
+	List<String> resultList = dateCalculationService.calculate(LocalDate.parse(inputDate))
+			.stream()
+			.map(result -> result.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
+			.collect(Collectors.toList());
 
 	model.addAttribute("resultList", resultList);
 
@@ -105,7 +103,7 @@ public class DateCalculationController {
     // 確認画面にて「登録する」押下時 エラーがなければDBに新規登録してtop画面に戻る
     @PostMapping("/complete")
     public String create(@Validated FormulaData formulaData, BindingResult result, Model model,
-			RedirectAttributes redirectAttributes) {
+		    RedirectAttributes redirectAttributes) {
 
 	if (result.hasErrors()) {
 	    redirectAttributes.addFlashAttribute("complete", "新規登録失敗しました。");
@@ -157,7 +155,7 @@ public class DateCalculationController {
     // 確認画面にて「更新する」押下時 エラーがなければDBに更新登録してchnge.htmlに戻る
     @PostMapping("/change-complete")
     public String update(@Validated FormulaData formulaData, BindingResult result, Model model,
-			RedirectAttributes redirectAttributes) {
+		    RedirectAttributes redirectAttributes) {
 
 	if (result.hasErrors()) {
 	    redirectAttributes.addFlashAttribute("complete", "更新失敗しました。");
@@ -165,12 +163,12 @@ public class DateCalculationController {
 	}
 
 	dateCalculationService.updateOne(
-			    formulaData.getId(),
-			    formulaData.getName(),
-			    formulaData.getDetail(),
-			    formulaData.getYear(),
-			    formulaData.getMonth(),
-			    formulaData.getDay());
+			formulaData.getId(),
+			formulaData.getName(),
+			formulaData.getDetail(),
+			formulaData.getYear(),
+			formulaData.getMonth(),
+			formulaData.getDay());
 	redirectAttributes.addFlashAttribute("complete", "更新完了しました。");
 	return "redirect:/calculation/top";
     }
@@ -178,7 +176,7 @@ public class DateCalculationController {
     // calculation.htmlにて[削除]押下時、DBから削除する
     @PostMapping("delete/id={id}")
     public String delete(@PathVariable int id, @ModelAttribute FormulaData formulaData,
-			RedirectAttributes redirectAttributes) {
+		    RedirectAttributes redirectAttributes) {
 	dateCalculationService.deleteOne(formulaData);
 	redirectAttributes.addFlashAttribute("complete", "削除完了しました。");
 	return "redirect:/calculation/top";

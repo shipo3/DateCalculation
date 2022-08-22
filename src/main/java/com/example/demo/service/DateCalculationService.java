@@ -51,9 +51,7 @@ public class DateCalculationService {
      *
      * @param inputDate the date to be calculated, not {@code null}
      */
-    public List<LocalDate> dateAdjust(String inputDate) {
-	// inputにて取得した日付をLocalDate型にする
-	LocalDate ld = LocalDate.parse(inputDate);
+    public List<LocalDate> calculate(LocalDate iD) {
 	// 結果を入れるリストを作る
 	List<LocalDate> resultList = new ArrayList<LocalDate>();
 
@@ -62,8 +60,11 @@ public class DateCalculationService {
 	// 取得したデータから取り出して日付をプラスする
 	// Collection の中身を利用して、何かの値を作成し、リストに変換
 	resultList = formulaDatas.stream()
-		    .map(fd -> ld.plusYears(fd.getYear()).plusMonths(fd.getMonth()).plusDays(fd.getDay()))
-		    .collect(Collectors.toList());
+			.map(
+					fd -> iD.plusYears(fd.getYear())
+							.plusMonths(fd.getMonth())
+							.plusDays(fd.getDay()))
+			.collect(Collectors.toList());
 
 	return resultList;
     }
