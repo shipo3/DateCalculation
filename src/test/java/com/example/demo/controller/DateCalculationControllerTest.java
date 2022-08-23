@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -90,6 +91,106 @@ public class DateCalculationControllerTest {
 			.andExpect(view().name("calculation/top"));
 
 	verify(dateCalculationService).calculate(LocalDate.parse("2022-05-01"));
+    }
+
+    @Test
+    void 新規登録ページをGETすると結果が200となり新規登録ページが返ること() throws Exception {
+	mockMvc.perform(get("/calculation/new"))
+			.andExpect(status().isOk())
+			.andExpect(model().attribute("formuladata", new FormulaData()))
+			.andExpect(view().name("calculation/new"));
+    }
+
+    @Test
+    void 新規登録ページで登録名がNULLの状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	mockMvc.perform(
+			post("/calculation/new-confirm").param("id", "1")
+					.param("detail", "最大値")
+					.param("year", "100")
+					.param("month", "0")
+					.param("day", "0"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("calculation/new"));
+    }
+
+    @Test
+    void 新規登録ページで登録名が空白の状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	mockMvc.perform(
+			post("/calculation/new-confirm").param("id", "1")
+					.param("name", " ")
+					.param("detail", "最大値")
+					.param("year", "100")
+					.param("month", "0")
+					.param("day", "0"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("calculation/new"));
+    }
+
+    @Test
+    void 新規登録ページで登録名が31文字以上の状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	mockMvc.perform(
+			post("/calculation/new-confirm").param("id", "1")
+					.param("name", "あかさたなはまやらわあかさたなはまやらわあかさたなはまやらわあ")
+					.param("detail", "最大値")
+					.param("year", "100")
+					.param("month", "0")
+					.param("day", "0"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("calculation/new"));
+    }
+
+    @Test
+    void 新規登録ページで説明がNULLの状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	mockMvc.perform(
+			post("/calculation/new-confirm").param("id", "1")
+					.param("name", "年のみ")
+					.param("year", "100")
+					.param("month", "0")
+					.param("day", "0"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("calculation/new"));
+    }
+
+    @Test
+    void 新規登録ページで説明が空白の状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	mockMvc.perform(
+			post("/calculation/new-confirm").param("id", "1")
+					.param("name", "年のみ")
+					.param("detail", " ")
+					.param("year", "100")
+					.param("month", "0")
+					.param("day", "0"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("calculation/new"));
+    }
+
+    @Test
+    void 新規登録ページで説明が51文字以上の状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	mockMvc.perform(
+			post("/calculation/new-confirm").param("id", "1")
+					.param("name", "年のみ")
+					.param("detail", "あかさたなはまやらわあかさたなはまやらわあかさたなはまやらわあかさたなはまやらわあかさたなはまやらわあ")
+					.param("year", "100")
+					.param("month", "0")
+					.param("day", "0"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("calculation/new"));
+    }
+
+    @Test
+    void 新規登録確認ページで登録処理に成功するとサービスで処理されてTOPページに遷移すること() throws Exception {
+	mockMvc.perform(
+			post("/calculation/complete").param("id", "1")
+					.param("name", "年のみ")
+					.param("detail", "最大値")
+					.param("year", "100")
+					.param("month", "0")
+					.param("day", "0"))
+			.andExpect(status().isFound())
+			.andExpect(model().hasNoErrors())
+			.andExpect(view().name("redirect:/calculation/top"));
+
+	verify(dateCalculationService).insertOne(any());
     }
 
 }
