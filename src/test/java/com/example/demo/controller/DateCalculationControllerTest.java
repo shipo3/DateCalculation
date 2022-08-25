@@ -111,6 +111,7 @@ public class DateCalculationControllerTest {
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
@@ -124,6 +125,7 @@ public class DateCalculationControllerTest {
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
@@ -137,6 +139,7 @@ public class DateCalculationControllerTest {
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
@@ -149,6 +152,7 @@ public class DateCalculationControllerTest {
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
@@ -162,6 +166,7 @@ public class DateCalculationControllerTest {
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
@@ -175,6 +180,7 @@ public class DateCalculationControllerTest {
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
@@ -228,6 +234,7 @@ public class DateCalculationControllerTest {
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/change"));
     }
 
