@@ -104,8 +104,10 @@ public class DateCalculationControllerTest {
 
     @Test
     void 新規登録ページで登録名がNULLの状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	String str = null;
 	mockMvc.perform(
 			post("/calculation/new-confirm").param("id", "1")
+					.param("name", str)
 					.param("detail", "最大値")
 					.param("year", "100")
 					.param("month", "0")
@@ -145,9 +147,11 @@ public class DateCalculationControllerTest {
 
     @Test
     void 新規登録ページで説明がNULLの状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	String str = null;
 	mockMvc.perform(
 			post("/calculation/new-confirm").param("id", "1")
 					.param("name", "年のみ")
+					.param("detail", str)
 					.param("year", "100")
 					.param("month", "0")
 					.param("day", "0"))
@@ -227,8 +231,10 @@ public class DateCalculationControllerTest {
     // 新規登録画面同様のバリデーションチェックが機能するか1パターン確認
     @Test
     void 更新ページで登録名がNULLの状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	String str = null;
 	mockMvc.perform(
 			post("/calculation/change-confirm").param("id", "1")
+					.param("name", str)
 					.param("detail", "最大値")
 					.param("year", "100")
 					.param("month", "0")
