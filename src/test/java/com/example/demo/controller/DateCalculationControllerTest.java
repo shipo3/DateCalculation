@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -103,13 +104,16 @@ public class DateCalculationControllerTest {
 
     @Test
     void 新規登録ページで登録名がNULLの状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	String str = null;
 	mockMvc.perform(
 			post("/calculation/new-confirm").param("id", "1")
+					.param("name", str)
 					.param("detail", "最大値")
 					.param("year", "100")
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
@@ -123,6 +127,7 @@ public class DateCalculationControllerTest {
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
@@ -136,18 +141,22 @@ public class DateCalculationControllerTest {
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
     @Test
     void 新規登録ページで説明がNULLの状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	String str = null;
 	mockMvc.perform(
 			post("/calculation/new-confirm").param("id", "1")
 					.param("name", "年のみ")
+					.param("detail", str)
 					.param("year", "100")
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
@@ -161,6 +170,7 @@ public class DateCalculationControllerTest {
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
@@ -174,6 +184,7 @@ public class DateCalculationControllerTest {
 					.param("month", "0")
 					.param("day", "0"))
 			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
 			.andExpect(view().name("calculation/new"));
     }
 
@@ -191,6 +202,71 @@ public class DateCalculationControllerTest {
 			.andExpect(view().name("redirect:/calculation/top"));
 
 	verify(dateCalculationService).insertOne(any());
+    }
+
+    @Test
+    void 更新ページをGETすると結果が200となり更新ページが返ること() throws Exception {
+	Optional<FormulaData> fd = Optional.of(new FormulaData(1, "年のみ", "最大値", 100, 0, 0));
+	doReturn(fd).when(dateCalculationService)
+			.getOne(1);
+	mockMvc.perform(get("/calculation/change/id={id}", 1))
+			.andExpect(status().isOk())
+			.andExpect(model().attribute("formulaData", fd.get()))
+			.andExpect(view().name("calculation/change"));
+
+	verify(dateCalculationService).getOne(1);
+    }
+
+    @Test
+    void 存在しないIDにて更新ページをGETするとTOPページに遷移すること() throws Exception {
+	doReturn(Optional.empty()).when(dateCalculationService)
+			.getOne(999);
+	mockMvc.perform(get("/calculation/change/id={id}", "999"))
+			.andExpect(status().isFound())
+			.andExpect(view().name("redirect:/calculation/top"));
+
+	verify(dateCalculationService).getOne(999);
+    }
+
+    // 新規登録画面同様のバリデーションチェックが機能するか1パターン確認
+    @Test
+    void 更新ページで登録名がNULLの状態で次へ進むと例外情報が入った状態で画面が返ること() throws Exception {
+	String str = null;
+	mockMvc.perform(
+			post("/calculation/change-confirm").param("id", "1")
+					.param("name", str)
+					.param("detail", "最大値")
+					.param("year", "100")
+					.param("month", "0")
+					.param("day", "0"))
+			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
+			.andExpect(view().name("calculation/change"));
+    }
+
+    @Test
+    void 更新確認ページで更新処理に成功するとサービスで処理されてTOPページに遷移すること() throws Exception {
+	mockMvc.perform(
+			post("/calculation/change-complete").param("id", "1")
+					.param("name", "年のみ")
+					.param("detail", "最小値")
+					.param("year", "-100")
+					.param("month", "0")
+					.param("day", "0"))
+			.andExpect(status().isFound())
+			.andExpect(model().hasNoErrors())
+			.andExpect(view().name("redirect:/calculation/top"));
+
+	verify(dateCalculationService).updateOne(1, "年のみ", "最小値", -100, 0, 0);
+    }
+
+    @Test
+    void TOPページで削除するとサービスで処理されてTOPページに遷移すること() throws Exception {
+	mockMvc.perform(post("/calculation/delete/id={id}", 1))
+			.andExpect(status().isFound())
+			.andExpect(view().name("redirect:/calculation/top"));
+
+	verify(dateCalculationService).deleteOne(any());
     }
 
 }

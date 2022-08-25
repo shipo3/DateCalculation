@@ -117,11 +117,8 @@ public class DateCalculationController {
     // top.htmlにて[更新]押下時にchange.htmlを表示
     @GetMapping("/change/id={id}")
     public String change(@PathVariable("id") int id, Model model, RedirectAttributes redirectAttributes) {
-	System.out.println(dateCalculationService.getOne(id));
-
 	Optional<FormulaData> fd = dateCalculationService.getOne(id);
 	if (fd.isEmpty()) {
-	    System.out.println("値がnullです");
 	    redirectAttributes.addFlashAttribute("complete", "存在しないIDです。");
 	    return "redirect:/calculation/top";
 	}
