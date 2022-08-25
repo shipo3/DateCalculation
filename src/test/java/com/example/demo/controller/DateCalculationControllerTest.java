@@ -199,7 +199,7 @@ public class DateCalculationControllerTest {
 	Optional<FormulaData> fd = Optional.of(new FormulaData(1, "年のみ", "最大値", 100, 0, 0));
 	doReturn(fd).when(dateCalculationService)
 			.getOne(1);
-	mockMvc.perform(get("/calculation/change/id={id}", "1"))
+	mockMvc.perform(get("/calculation/change/id={id}", 1))
 			.andExpect(status().isOk())
 			.andExpect(model().attribute("formulaData", fd.get()))
 			.andExpect(view().name("calculation/change"));
@@ -245,6 +245,15 @@ public class DateCalculationControllerTest {
 			.andExpect(view().name("redirect:/calculation/top"));
 
 	verify(dateCalculationService).updateOne(1, "年のみ", "最小値", -100, 0, 0);
+    }
+
+    @Test
+    void TOPページで削除するとサービスで処理されてTOPページに遷移すること() throws Exception {
+	mockMvc.perform(post("/calculation/delete/id={id}", 1))
+			.andExpect(status().isFound())
+			.andExpect(view().name("redirect:/calculation/top"));
+
+	verify(dateCalculationService).deleteOne(any());
     }
 
 }
