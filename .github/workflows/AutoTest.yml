@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: exec datasets.sql
         run: |
-          mysql -h 127.0.0.1 --port 3306 -u root -p kagiu310Fuwauu8 -e "$(cat $(find ./ -name datasets.sql))"
+          mysql -h 127.0.0.1 --port 3306 -u root -pkagiu310Fuwauu8 -e "$(cat $(find ./ -name datasets.sql))"
       
       - uses: actions/checkout@v3
       - name: Set up JDK 11
