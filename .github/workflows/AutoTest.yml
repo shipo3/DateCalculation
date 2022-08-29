@@ -19,6 +19,9 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ROOT_PASSWORD: kagiu310Fuwauu8
+          MYSQL_DATABASE: date_calculation
+          MYSQL_USER: kuma
+          MYSQL_PASSWORD: 2203
         options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
     steps:
       - name: exec datasets.sql
