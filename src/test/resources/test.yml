@@ -2,6 +2,7 @@ cacheConnection: false
 cacheTableNames: false
 properties:
   schema: formula
+  caseSensitiveTableNames: false
 caseInsensitiveStrategy: LOWERCASE
 connectionConfig:
   url: "jdbc:mysql://localhost:3307/date_calculation"
